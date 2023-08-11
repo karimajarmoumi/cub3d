@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/09 09:59:50 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:16:40 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,35 @@ char *getLine(int fd)
     }
     return line;
 }
+void init(t_player *player, t_map *map)
+{
 
+    player->flag_on = 0;
+    player->count_player =0 ;
+    map->height = 0;
+}
 void readMap(char *fileName,t_map *map)
 {
     char *line;
-    int height;
     int fd;
     t_map *tmp_map;
+    t_player player;
 
+    init(&player, map);
     tmp_map = map;
-    height = 0;
     line = ft_strdup("");
     fd = open (fileName,O_RDONLY);
     while(line)
     {
           ft_free(line);
           line = getLine(fd);
-          height++;
+          check_player(&player,line,map->height);
+          map->height++;
     }
-
     ft_free(line);
     close(fd);
-    tmp_map->height= height - 1;
+    tmp_map->height--;
     tmp_map->map = malloc(sizeof(char*)*( tmp_map->height + 1));
     fillArray(tmp_map->map ,fileName);
-   check_errors(*tmp_map);
    //displayArray(map->map);
 }
