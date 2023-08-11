@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/08 16:14:28 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:36:51 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "parse.h"
+
+ #include "parse.h"
 
 void fillArray(char **map,char *fileName)
 {
     char *line;
-    int width;
     int i = 0;
     char **tmp_map;
     line = ft_strdup("");
@@ -36,11 +36,11 @@ void fillArray(char **map,char *fileName)
 
 int main(int ac, char **av)
 {
-  
+
     if(ac == 2)
     {
         t_map map;
-       
+
        if(check_extension(av[1])==true)
             readMap(av[1],&map);
         printf("woooow\n");
