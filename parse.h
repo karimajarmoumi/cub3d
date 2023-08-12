@@ -40,12 +40,11 @@ typedef struct s_position
     int x;
     int y;
 }t_position;
-typdef struct s_args
+typedef struct s_args
 {
     char *key;
     char *value;
     int flag;
-
 }t_args;
 typedef struct  s_map
 {
@@ -71,5 +70,7 @@ void    print_error(char *msg_error);
 void    check_player(t_player *player,char *line, t_map *map);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	*ft_memset(void *b, int c, size_t len);
-
+void flood_fill(t_player *player, int pos_y, int pos_x);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+int    ft_isalpha(int c);
 #endif

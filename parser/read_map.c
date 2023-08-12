@@ -36,27 +36,53 @@ char *getLine(int fd)
     }
     return line;
 }
+void  affect_value(t_args **arg,char *key)
+{
+    *arg = malloc(sizeof(t_args));
+    (*arg)->key=ft_strdup(key);
+    (*arg)->flag = 0;
+}
 void init(t_player *player, t_map *map)
 {
     player->flag_on = 0;
     player->count_player = 0 ;
+    map->args = malloc(sizeof(t_args*)*7);
+    affect_value(&(map->args[0]),"NO");
+    affect_value(&(map->args[1]),"SO");
+    affect_value(&(map->args[2]),"WE");
+    affect_value(&(map->args[3]),"EA");
+    affect_value(&(map->args[4]),"F");
+    affect_value(&(map->args[5]),"C");
+    map->args[6]=NULL;   
     map->height = 0;
 }
 
-
-void flood_fill(t_player *player, int pos_y, int pos_x)
+void check_textures(char *line, t_map *map,int *count)
 {
-     if ( player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x]  == 'F')
-        return ;
-
-    if (player->map_cpy[pos_y][pos_x] == SPACE )
-        print_error("map invalid");
-    player->map_cpy[pos_y][pos_x] = '1';
-    flood_fill(player, pos_y, pos_x + 1);
-    flood_fill(player, pos_y, pos_x - 1);
-    flood_fill(player, pos_y + 1, pos_x);
-    flood_fill(player, pos_y - 1, pos_x);
-
+    char *key;
+    char *tmp;
+    int i;
+    *count = 0;
+    i = 0;
+    key = ft_strdup("");
+    while(line && ft_isalpha(line[i]))
+    {
+        tmp =key;
+        key=ft_charjoin(key,line[i]);
+        ft_free(tmp);
+        i++;
+    }
+    i = 0;
+    while(map->args[i] && map->args[i]->key)
+    {
+        if(!strcmp(key,map->args[i]->key))
+            map->args[i]->flag++;
+        if(map->args[i]->flag==1)
+            (*count)++;
+        if(map->args[i]->flag > 1)
+            print_error("a path is duplicated");
+        i++;
+    }
 }
 
 void readMap(char *fileName,t_map *map)
@@ -64,6 +90,7 @@ void readMap(char *fileName,t_map *map)
     char        *line;
     int         fd;
     t_player    player;
+    int count = 0;
 
     init(&player, map);
     line = ft_strdup("");
@@ -72,10 +99,16 @@ void readMap(char *fileName,t_map *map)
     {
         ft_free(line);
         line = getLine(fd);
-        //check_textures(line);
-        //check_player(&player, line, map);
+
+        if(count < 6)
+            check_textures(line,map,&count);
+        else if(count == 6)
+             check_player(&player, line, map);
         map->height++;
     }
+
+    if(count < 6)
+        print_error("a path is missing");
     ft_free(line);
     close(fd);
     map->height--;
