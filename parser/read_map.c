@@ -49,11 +49,7 @@ void flood_fill(t_player *player, int pos_y, int pos_x)
 {
 
 
-
-    // len = ft_strlen(player->map_cpy[pos_y]);
-    printf("heeelo\n");
-    printf("%d %d |%c|\n",pos_y, pos_x, player->map_cpy[pos_y][pos_x]);
-     if (pos_y < 0 || pos_x < 0 || pos_y >  6|| pos_x > 15|| player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x] == 'F' )
+    if (pos_y < 0 || pos_x < 0 || pos_y >= 3|| pos_x >=10 || player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x] == 'F' )
         return ;
 
     if (player->map_cpy[pos_y][pos_x] == SPACE )
@@ -62,9 +58,7 @@ void flood_fill(t_player *player, int pos_y, int pos_x)
         player->map_cpy[pos_y][pos_x] = 'F';
         return;
     }
-    printf("lllll\n");
     flood_fill(player, pos_y + 1, pos_x);
-    printf("kkkkk\n");
     flood_fill(player, pos_y - 1, pos_x);
     flood_fill(player, pos_y, pos_x + 1);
     flood_fill(player, pos_y, pos_x - 1);
@@ -83,6 +77,7 @@ void readMap(char *fileName,t_map *map)
     {
         ft_free(line);
         line = getLine(fd);
+        //check_textures(line);
         check_player(&player, line, map);
         map->height++;
     }

@@ -33,20 +33,27 @@ typedef struct  s_player
     int flag_on;
     int count_player;
     char **map_cpy;
-}t_player;
 
+}t_player;
 typedef struct s_position
 {
     int x;
     int y;
 }t_position;
 
+typedef struct args
+{
+    char *key;
+    char *value;
+    int key_on;
+}t_args;
 typedef struct  s_map
 {
     //height && width not fix
     int height;
     char **map;
     t_position player_pos;
+    t_args **args;
 } t_map;
 
 char	*ft_strjoin(char const *s1, char const *s2);
