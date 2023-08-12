@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/12 16:45:59 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:32:00 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,31 +43,20 @@ void init(t_player *player, t_map *map)
     map->height = 0;
 }
 
-//flood
 
 void flood_fill(t_player *player, int pos_y, int pos_x)
 {
-
-
-
-    // len = ft_strlen(player->map_cpy[pos_y]);
-    printf("heeelo\n");
-    printf("%d %d |%c|\n",pos_y, pos_x, player->map_cpy[pos_y][pos_x]);
-     if (pos_y < 0 || pos_x < 0 || pos_y >  6|| pos_x > 15|| player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x] == 'F' )
+     if ( player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x]  == 'F')
         return ;
 
     if (player->map_cpy[pos_y][pos_x] == SPACE )
-    {
-        printf("heere|%c|\n",player->map_cpy[pos_y][pos_x]);
-        player->map_cpy[pos_y][pos_x] = 'F';
-        return;
-    }
-    printf("lllll\n");
-    flood_fill(player, pos_y + 1, pos_x);
-    printf("kkkkk\n");
-    flood_fill(player, pos_y - 1, pos_x);
+        print_error("map invalid");
+    player->map_cpy[pos_y][pos_x] = '1';
     flood_fill(player, pos_y, pos_x + 1);
     flood_fill(player, pos_y, pos_x - 1);
+    flood_fill(player, pos_y + 1, pos_x);
+    flood_fill(player, pos_y - 1, pos_x);
+
 }
 
 void readMap(char *fileName,t_map *map)
@@ -83,7 +72,7 @@ void readMap(char *fileName,t_map *map)
     {
         ft_free(line);
         line = getLine(fd);
-        check_player(&player, line, map);
+        //check_player(&player, line, map);
         map->height++;
     }
     ft_free(line);
