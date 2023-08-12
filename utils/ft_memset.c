@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_extension.c                                  :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/08 16:14:54 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/12 09:22:31 by kjarmoum         ###   ########.fr       */
+/*   Created: 2022/10/19 22:37:17 by kjarmoum          #+#    #+#             */
+/*   Updated: 2023/08/12 12:45:40 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
 
-bool check_extension(char *fileName)
+void	*ft_memset(void *b, int c, size_t len)
 {
-    int len;
-    int extensionLen;
-    char *extension;
+	size_t	i;
 
-    extension = ft_strdup(".cub");
-    extensionLen = 3;
-    len = ft_strlen(fileName ) - 1;
-    while (extensionLen >= 0)
-    {
-        if (fileName[len] != extension[extensionLen])
-        {
-           //msg d'erroor
-            return false;
-        }
-        extensionLen--;
-        len--;
-    }
-    free(extension);
-    return true;
+	i = 0;
+
+
+	while (i < len)
+		((unsigned char *)b)[i++] = (unsigned char)c;
+
+	return (b);
 }

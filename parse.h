@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:27 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/11 18:05:47 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/12 14:40:05 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,25 +27,26 @@
 #define PLAYER_S 'S'
 #define PLAYER_N 'N'
 
-typedef struct s_position
-{
-    int player_x;
-    int player_y;
-}t_position;
-
 typedef struct  s_player
 {
     char player_symbol;
     int flag_on;
     int count_player;
-    t_position player_pos;
+    char **map_cpy;
 }t_player;
+
+typedef struct s_position
+{
+    int x;
+    int y;
+}t_position;
 
 typedef struct  s_map
 {
-
+    //height && width not fix
     int height;
     char **map;
+    t_position player_pos;
 } t_map;
 
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -56,9 +57,12 @@ void readMap(char *fileName,t_map *map);
 void displayArray(char **str);
 char *getLine(int fd);
  char *copyString(char *src,char *des);
- void fillArray(char **map,char *fileName);
+void fillArray(t_map *map,t_player *player, char *fileName);
  void ft_free(char *str);
 char	*ft_charjoin(char const *s1, char character);
-void print_error(char *msg_error);
-void check_player(t_player *player,char *line, int height);
+void    print_error(char *msg_error);
+void    check_player(t_player *player,char *line, t_map *map);
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+void	*ft_memset(void *b, int c, size_t len);
+
 #endif

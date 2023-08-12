@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/11 18:16:40 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/12 16:45:59 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 char *getLine(int fd)
 {
     char character;
-    int nbyt ;
+    int nbyt;
     int i = 0;
     char *tmp;
     char *line;
+
     line =NULL;
     nbyt = read(fd,&character,1);
     while(nbyt >0)
@@ -37,33 +38,64 @@ char *getLine(int fd)
 }
 void init(t_player *player, t_map *map)
 {
-
     player->flag_on = 0;
-    player->count_player =0 ;
+    player->count_player = 0 ;
     map->height = 0;
 }
+
+//flood
+
+void flood_fill(t_player *player, int pos_y, int pos_x)
+{
+
+
+
+    // len = ft_strlen(player->map_cpy[pos_y]);
+    printf("heeelo\n");
+    printf("%d %d |%c|\n",pos_y, pos_x, player->map_cpy[pos_y][pos_x]);
+     if (pos_y < 0 || pos_x < 0 || pos_y >  6|| pos_x > 15|| player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x] == 'F' )
+        return ;
+
+    if (player->map_cpy[pos_y][pos_x] == SPACE )
+    {
+        printf("heere|%c|\n",player->map_cpy[pos_y][pos_x]);
+        player->map_cpy[pos_y][pos_x] = 'F';
+        return;
+    }
+    printf("lllll\n");
+    flood_fill(player, pos_y + 1, pos_x);
+    printf("kkkkk\n");
+    flood_fill(player, pos_y - 1, pos_x);
+    flood_fill(player, pos_y, pos_x + 1);
+    flood_fill(player, pos_y, pos_x - 1);
+}
+
 void readMap(char *fileName,t_map *map)
 {
-    char *line;
-    int fd;
-    t_map *tmp_map;
-    t_player player;
+    char        *line;
+    int         fd;
+    t_player    player;
 
     init(&player, map);
-    tmp_map = map;
     line = ft_strdup("");
     fd = open (fileName,O_RDONLY);
     while(line)
     {
-          ft_free(line);
-          line = getLine(fd);
-          check_player(&player,line,map->height);
-          map->height++;
+        ft_free(line);
+        line = getLine(fd);
+        check_player(&player, line, map);
+        map->height++;
     }
     ft_free(line);
     close(fd);
-    tmp_map->height--;
-    tmp_map->map = malloc(sizeof(char*)*( tmp_map->height + 1));
-    fillArray(tmp_map->map ,fileName);
-   //displayArray(map->map);
+    map->height--;
+
+    fillArray(map, &player,fileName);
+    // check_errors()
+    displayArray(player.map_cpy);
+   flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
+   displayArray(player.map_cpy);
+
 }
+
+
