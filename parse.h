@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:27 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/12 14:40:05 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/12 18:31:26 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@ typedef struct s_position
     int x;
     int y;
 }t_position;
-
-typedef struct args
+typdef struct s_args
 {
     char *key;
     char *value;
-    int key_on;
+    int flag;
+
 }t_args;
 typedef struct  s_map
 {
