@@ -20,7 +20,7 @@ char *getLine(int fd)
     char *tmp;
     char *line;
 
-    line =NULL;
+    line = NULL;
     nbyt = read(fd,&character,1);
     while(nbyt >0)
     {
@@ -36,52 +36,73 @@ char *getLine(int fd)
     }
     return line;
 }
-void  affect_value(t_args **arg,char *key)
+void  affect_value(t_args **arg,char *key,char *value,int flag)
 {
-    *arg = malloc(sizeof(t_args));
-    (*arg)->key=ft_strdup(key);
-    (*arg)->flag = 0;
+    if(flag == 1)
+    {
+        *arg = malloc(sizeof(t_args));
+        (*arg)->key=ft_strdup(key);
+        (*arg)->flag = 0;
+    }
+    else
+        (*arg)->value=ft_strdup(value);
 }
 void init(t_player *player, t_map *map)
 {
     player->flag_on = 0;
     player->count_player = 0 ;
     map->args = malloc(sizeof(t_args*)*7);
-    affect_value(&(map->args[0]),"NO");
-    affect_value(&(map->args[1]),"SO");
-    affect_value(&(map->args[2]),"WE");
-    affect_value(&(map->args[3]),"EA");
-    affect_value(&(map->args[4]),"F");
-    affect_value(&(map->args[5]),"C");
+    affect_value(&(map->args[0]),"NO",NULL,1);
+    affect_value(&(map->args[1]),"SO",NULL,1);
+    affect_value(&(map->args[2]),"WE",NULL,1);
+    affect_value(&(map->args[3]),"EA",NULL,1);
+    affect_value(&(map->args[4]),"F",NULL,1);
+    affect_value(&(map->args[5]),"C",NULL,1);
     map->args[6]=NULL;   
     map->height = 0;
 }
-
-void check_textures(char *line, t_map *map,int *count)
+void check_color_rang(char **key_value)
 {
-    char *key;
-    char *tmp;
+    char **range;
+    int num;
     int i;
+    i = 0;
+    if(!ft_strcmp(key_value[0], "F")|| !ft_strcmp(key_value[0], "C"))
+       {
+            range = ft_split(key_value[1],',');
+            while(range[i])
+            {
+                num = ft_atoi(range[i]);
+                if(num < MIN_RANGE ||  num >MAX_RANGE)
+                    print_error("range error");
+                i++;
+            }
+       }
+}
+void  check_identifier(char *line, t_map *map,int *count)
+{
+    char **key_value;
+    int   i;
+
     *count = 0;
+    key_value = ft_split(line,' ');
     i = 0;
-    key = ft_strdup("");
-    while(line && ft_isalpha(line[i]))
+    if(key_value && key_value[0] && key_value[1])
     {
-        tmp =key;
-        key=ft_charjoin(key,line[i]);
-        ft_free(tmp);
-        i++;
-    }
-    i = 0;
-    while(map->args[i] && map->args[i]->key)
-    {
-        if(!strcmp(key,map->args[i]->key))
-            map->args[i]->flag++;
-        if(map->args[i]->flag==1)
-            (*count)++;
-        if(map->args[i]->flag > 1)
-            print_error("a path is duplicated");
-        i++;
+        while(map->args[i] && map->args[i]->key)
+        {
+            if(!strcmp(key_value[0],map->args[i]->key))
+            {
+                map->args[i]->flag++;
+                affect_value(&(map->args[0]),NULL,key_value[1],0);
+                check_color_rang(key_value);
+            }
+            if(map->args[i]->flag==1)
+                (*count)++;
+            if(map->args[i]->flag > 1)
+                print_error("a path is duplicated");
+            i++;
+        }
     }
 }
 
@@ -98,27 +119,22 @@ void readMap(char *fileName,t_map *map)
     while(line)
     {
         ft_free(line);
-        line = getLine(fd);
 
+        line = getLine(fd);
         if(count < 6)
-            check_textures(line,map,&count);
+            check_identifier(line,map,&count);
         else if(count == 6)
              check_player(&player, line, map);
         map->height++;
-    }
-
-    if(count < 6)
-        print_error("a path is missing");
+    } 
     ft_free(line);
     close(fd);
+    if(count < 6)
+        print_error("there is a problem with identifier");
     map->height--;
-
     fillArray(map, &player,fileName);
-    // check_errors()
-    displayArray(player.map_cpy);
-   flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
-   displayArray(player.map_cpy);
-
+    flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
+   // displayArray(player.map_cpy);
 }
 
 
