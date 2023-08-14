@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/12 19:01:33 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/13 16:16:08 by kjarmoum         ###   ########.fr       */
+/*   Created: 2023/08/13 17:25:16 by kjarmoum          #+#    #+#             */
+/*   Updated: 2023/08/13 17:33:56 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../parse.h"
 
-int ft_strlen(const char *str)
+char	*ft_strchr(const char *s, int c)
 {
-    int i =0;
-    while(str[i])
-            i++;
-    return i;
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if ((unsigned char)s[i] == (unsigned char)c)
+			return ((char *)(&s[i]));
+		i++;
+	}
+	if ((unsigned char)c == '\0')
+		return ((char *)(&s[i]));
+	return (NULL);
 }

@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 17:27:41 by kel-baam          #+#    #+#             */
-/*   Updated: 2022/10/23 23:06:58 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/13 16:17:23 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "../parse.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)

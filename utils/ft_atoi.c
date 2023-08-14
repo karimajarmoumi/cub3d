@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 16:47:32 by kel-baam          #+#    #+#             */
-/*   Updated: 2022/10/24 17:09:09 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/14 20:26:22 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,7 @@ int	ft_atoi(const char *str)
 		if (result >= 9223372036854775807 && sign == 1)
 			return (-1);
 	}
+	if(str[i])
+		print_error("error in range color");
 	return (result * sign);
 }
