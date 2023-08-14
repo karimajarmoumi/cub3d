@@ -1,6 +1,6 @@
-NAME =cube
+NAME = cube
 
-CC = gcc
+CC = clang
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 

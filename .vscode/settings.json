@@ -1,4 +1,8 @@
 {
+	"terminal.integrated.env.linux": {
+        "LD_PRELOAD": null
+    },
+
 	"files.associations": {
 		"*.embeddedhtml": "html",
 		"stdlib.h": "c"
