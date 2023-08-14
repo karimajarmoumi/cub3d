@@ -28,7 +28,6 @@ void body_map(t_player *player, int *i, char *line)
     char *str;
     char *tmp;
 
-
     str = ft_strjoin(" ",line);
     tmp = str;
     str = ft_strjoin(str," ");

@@ -26,6 +26,8 @@
 #define PLAYER_E 'E'
 #define PLAYER_S 'S'
 #define PLAYER_N 'N'
+#define MIN_RANGE 0
+#define MAX_RANGE 255
 
 typedef struct  s_player
 {
@@ -48,7 +50,6 @@ typedef struct s_args
 }t_args;
 typedef struct  s_map
 {
-    //height && width not fix
     int height;
     char **map;
     t_position player_pos;
@@ -57,20 +58,23 @@ typedef struct  s_map
 
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
-int ft_strlen(const char *str);
-bool check_extension(char *fileName);
-void readMap(char *fileName,t_map *map);
-void displayArray(char **str);
-char *getLine(int fd);
- char *copyString(char *src,char *des);
-void fillArray(t_map *map,t_player *player, char *fileName);
- void ft_free(char *str);
+int     ft_strlen(const char *str);
+bool    check_extension(char *fileName);
+void    readMap(char *fileName,t_map *map);
+void    displayArray(char **str);
+char    *getLine(int fd);
+char    *copyString(char *src,char *des);
+void    fillArray(t_map *map,t_player *player, char *fileName);
+void    ft_free(char *str);
 char	*ft_charjoin(char const *s1, char character);
 void    print_error(char *msg_error);
 void    check_player(t_player *player,char *line, t_map *map);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 void	*ft_memset(void *b, int c, size_t len);
-void flood_fill(t_player *player, int pos_y, int pos_x);
+void    flood_fill(t_player *player, int pos_y, int pos_x);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-int    ft_isalpha(int c);
+int     ft_isalpha(int c);
+char	**ft_split(char const *s, char c);
+int	    ft_strcmp(char *s1, char *s2);
+int     ft_atoi(const char *str);
 #endif

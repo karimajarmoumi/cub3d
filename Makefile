@@ -2,7 +2,7 @@ NAME =cube
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
 SUB = *.c ./utils/*.c ./parser/*.c
 
