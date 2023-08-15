@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:01:25 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/13 16:17:14 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:14:09 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void flood_fill(t_player *player, int pos_y, int pos_x)
 {
-     if ( player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x]  == 'F')
+     if (player->map_cpy[pos_y][pos_x] == WALL || player->map_cpy[pos_y][pos_x]  == 'F')
         return ;
 
     if (player->map_cpy[pos_y][pos_x] == SPACE )

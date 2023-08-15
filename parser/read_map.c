@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/14 20:31:41 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:18:23 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char *getLine(int fd)
     while(nbyt > 0)
     {
         if(i == 0)
-            line=ft_strdup("");
+            line = ft_strdup("");
         if(character =='\n' || character=='\0')
              return line;
         tmp = line;
@@ -51,6 +51,9 @@ void init(t_player *player, t_map *map)
 {
     player->flag_on = 0;
     player->count_player = 0 ;
+    player->map_begin = 0;
+    map->player_pos.x = -1;
+    map->player_pos.y = -1;
     map->args = malloc(sizeof(t_args*)*7);
     affect_value(&(map->args[0]),"NO",NULL);
     affect_value(&(map->args[1]),"SO",NULL);
@@ -59,7 +62,8 @@ void init(t_player *player, t_map *map)
     affect_value(&(map->args[4]),"F",NULL);
     affect_value(&(map->args[5]),"C",NULL);
     map->args[6]=NULL;   
-    map->height = 0;
+    map->map_height = 0;
+    map-> total_height = 0;
 }
 void check_color_rang(char **key_value)
 {
@@ -118,8 +122,6 @@ void  check_identifier(char *line, t_map *map,int *count)
                 i++;
             }
         }
-        else if (count_words(key_value)==1)
-            print_error("identifier words is not as expected");
     }
 }
 
@@ -137,23 +139,31 @@ void readMap(char *fileName, t_map *map)
     while (line)
     {
         ft_free(line);
+          printf("%d\n",count);
         line = getLine(fd);
+        if(count == 6 && ft_strcmp(line,""))
+            player.map_begin = 1;
         if(count < 6)
             check_identifier(line, map, &count);
-        else if(count == 6)
+        else if(count == 6 && player.map_begin == 1)
+        {
             check_player(&player, line, map);
-        map->height++;
-    } 
+            map->map_height++;
+        }
+        map->total_height++;
+    }
+  
     ft_free(line);
     close(fd);
     if (count < 6)
         print_error("there is a problem with identifier");
-    map->height--;
+    map->map_height--;
+    if(!map->map_height)
+        print_error("there is no map");
     fillArray(map, &player,fileName);
+    //displayArray(map->map);
+    flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
     //displayArray(player.map_cpy);
-    //flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
-    //displayArray(player.map_cpy);
-
 }
 
 

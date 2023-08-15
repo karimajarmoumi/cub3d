@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:27 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/14 20:30:53 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/15 11:34:48 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct  s_player
     int     flag_on;
     int     count_player;
     char    **map_cpy;
+    int      map_begin;
 }t_player;
 
 typedef struct s_position
@@ -52,7 +53,8 @@ typedef struct s_args
 
 typedef struct  s_map
 {
-    int         height;
+    int         map_height;
+    int         total_height;
     char        **map;
     t_args      **args;
     t_position  player_pos;
@@ -83,7 +85,9 @@ char    *ft_strchr(const char *s, int c);
 char	**ft_split(char const *s, char c);
 int	    ft_strcmp(char *s1, char *s2);
 int     ft_atoi(const char *str);
-int  count_words(char **str);
+int     count_words(char **str);
 int		ft_isdigit(int c);
+int     is_line_ofMap(char *line);
+
 
 #endif
