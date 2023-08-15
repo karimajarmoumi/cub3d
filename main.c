@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/14 20:32:31 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/15 12:06:35 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,27 +64,28 @@ void fillArray(t_map *map, t_player *player, char *fileName)
     int i;
     int fd;
     int j;
+    int count;
 
     i = 0;
     j = 0;
+    count = 0;
     fd = open (fileName,O_RDONLY);
     line = ft_strdup("");
-    map->map = malloc(sizeof(char*) * (map->height + 1));
-    player->map_cpy = malloc(sizeof(char*) * (map->height + 3));
+    map->map = malloc(sizeof(char*) * (map->map_height + 1));
+    player->map_cpy = malloc(sizeof(char*) * (map->map_height + 3));
     while(line)
     {
        ft_free(line);
        line = getLine(fd);
        if(line)
        {
-            map->map[i] = ft_strdup(line);
-            // if (is_line_ofMap(line) && ft_strlen(line))
-            // {
-                //printf(" len %d |%d %s|\n", ft_strlen(line), is_line_ofMap(line), line);
-                map_cpy(line, player, &j, map->height);
-                // exit(1);
-            // }
-            i++;
+            if(count >= map->total_height - map->map_height-1)
+            {
+                map->map[i] = ft_strdup(line);
+                map_cpy(line, player, &j, map->map_height);
+                i++;  
+            }
+            count++;
        }
     }
     map->map[i] =  NULL;
