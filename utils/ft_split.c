@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parse.h"
+#include "../cube.h"
 static int	len_words(char const *s, char c)
 {
 	int	i;

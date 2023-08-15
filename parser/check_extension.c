@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parse.h"
+#include "../cube.h"
 
 bool check_extension(char *fileName)
 {
@@ -24,10 +24,7 @@ bool check_extension(char *fileName)
     while (extensionLen >= 0)
     {
         if (fileName[len] != extension[extensionLen])
-        {
-           //msg d'erroor
             return false;
-        }
         extensionLen--;
         len--;
     }
