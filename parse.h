@@ -6,13 +6,14 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:27 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 11:34:48 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:45:34 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 #define PARSE_H
 
+#include <mlx.h>
 #include <stdio.h>
 #include<stdbool.h>
 #include <unistd.h>
@@ -28,6 +29,7 @@
 #define PLAYER_N 'N'
 #define MIN_RANGE 0
 #define MAX_RANGE 255
+#define WALL_IMG_PATH "./wall.img"
 
 typedef struct  s_player
 {

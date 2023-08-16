@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 12:06:35 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/16 08:46:40 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,10 @@ void fillArray(t_map *map, t_player *player, char *fileName)
 }
 int main(int ac, char **av)
 {
+  
+
+
+    
     t_map   map;
     
     if (ac == 2)

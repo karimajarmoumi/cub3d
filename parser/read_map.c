@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 12:18:23 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/15 13:11:44 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void readMap(char *fileName, t_map *map)
     while (line)
     {
         ft_free(line);
-          printf("%d\n",count);
+          //printf("%d\n",count);
         line = getLine(fd);
         if(count == 6 && ft_strcmp(line,""))
             player.map_begin = 1;
