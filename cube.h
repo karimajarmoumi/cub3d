@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
+#include <mlx.h>
 #define WALL '1'
 #define EMPTY '0'
 #define SPACE ' '
@@ -28,6 +29,8 @@
 #define PLAYER_N 'N'
 #define MIN_RANGE 0
 #define MAX_RANGE 255
+#define WINDOW_WIDTH 1920
+#define WINDOW_HEIGHT  1080
 
 typedef struct  s_player
 {
@@ -55,6 +58,8 @@ typedef struct  s_map
 {
     int         map_height;
     int         total_height;
+    int         floor_color;
+    int         ceiling_color;
     char        **map;
     t_args      **args;
     t_position  player_pos;
@@ -91,6 +96,5 @@ char    **split_identifier(char *line,char **key_value,int *identifier);
 int     is_identifier(char *key_value);
 void    affect_value(t_args **arg,char *key,char *value);
 void    check_identifier(char *line, t_map *map,int *count);
-void    check_color_rang(char **key_value);
-void check_color_rang(char **key_value);
+void check_color_rang(char **key_value, t_map *map);
 #endif

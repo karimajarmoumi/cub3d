@@ -3,7 +3,6 @@ NAME = cube
 CC = clang
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
-
 SUB = *.c ./utils/*.c ./parser/*.c
 
 OBJ =  *.o ./utils/*.o ./parser/*.o
@@ -11,7 +10,7 @@ OBJ =  *.o ./utils/*.o ./parser/*.o
 all : $(NAME)
 
 $(NAME) :$(SUB)
-	${CC} ${SUB} ${CFLAGS} -o ${NAME}
+	${CC} ${SUB} ${CFLAGS}  -o ${NAME}
 
 clean :
 	rm -f $(OBJ)
