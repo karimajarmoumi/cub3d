@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/16 09:54:14 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:53:34 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void init_map(t_player *player, t_map *map)
     player = init_player(player);
     map->player_pos.x = -1;
     map->player_pos.y = -1;
+    map->floor_color = 0;
+    map->ceiling_color = 0;
     map->args = malloc(sizeof(t_args*)*7);
     affect_value(&(map->args[0]),"NO",NULL);
     affect_value(&(map->args[1]),"SO",NULL);

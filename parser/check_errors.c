@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:50:20 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/16 09:53:44 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:53:54 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ void check_player_symbol(char character, t_player *player, int x, t_map *map)
 }
 void check_player(t_player *player,char *line, t_map *map)
  {
-    int i = 0;
-
+    int i;
+  
+    i = 0;
+    if(!ft_strcmp(line,""))
+        print_error("map invalid");
     while(line && line[i])
     {
-        
          if (player->flag_on == 0)
              check_player_symbol(line[i], player, i,map);
          else
@@ -40,8 +42,8 @@ void check_player(t_player *player,char *line, t_map *map)
             if (line[i] == player->player_symbol)
                 player->count_player++;
             if(player->count_player > 1)
-                //print_error("there is an error in counting player");
-            if ((line[i] != WALL && line[i] != EMPTY && line[i]!= player->player_symbol && line[i] != SPACE) || !ft_strcmp(line,""))
+                print_error("there is an error in counting player");
+            if ((line[i] != WALL && line[i] != EMPTY && line[i]!= player->player_symbol && line[i] != SPACE))
                 print_error("wrong character");
         }
         i++;

@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/16 09:50:59 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:54:45 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void display_map(t_map *map)
 int main(int ac, char **av)
 {
     t_map   map;
-
     if (ac == 2)
     {
         if (check_extension(av[1]) == true)
@@ -62,7 +61,7 @@ int main(int ac, char **av)
         else
             print_error("wrong extension");
             
-        printf("wwwwoooow\n");
+        printf("%d %dwwwwoooow\n",map.floor_color,map.ceiling_color);
     }
     else
         write(1,"Please enter a file name\n",25);

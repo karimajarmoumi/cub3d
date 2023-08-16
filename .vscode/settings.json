@@ -6,6 +6,7 @@
 	"files.associations": {
 		"*.embeddedhtml": "html",
 		"stdlib.h": "c"
+<<<<<<< HEAD
 	},
 	"terminal.integrated.profiles.linux": {
         "zsh": {
@@ -17,4 +18,8 @@
             ]
         }
     }
+=======
+	}
+	
+>>>>>>> 1d2c58bfd1f414d2e6e10e752f33bf95abfc10e2
 }
