@@ -6,3 +6,16 @@ C 225,255,1,
 check \n in the middle of map
 check flood fill 
 to DO 
+
+player not exist 
+
+
+
+        DOC 
+mlx_get_data_addr returns a char * address that represents
+the begining of the memory area where the image is stored.
+
+Endianness means that the bytes in computer memory are 
+read in a certain order.
+
+Litte_endian : LE stores the little-end first.

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_identifier.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 20:14:21 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/16 10:53:24 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ char **split_identifier(char *line,char **key_value,int *identifier)
 
 int is_identifier(char *key_value)
 {
-
-    
     if(!ft_strcmp(key_value,"NO"))
         return 1;
     else if(!ft_strcmp(key_value, "SO"))

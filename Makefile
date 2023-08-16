@@ -10,7 +10,7 @@ OBJ =  *.o ./utils/*.o ./parser/*.o
 all : $(NAME)
 
 $(NAME) :$(SUB)
-	${CC} ${SUB} ${CFLAGS}  -o ${NAME}
+	$(CC) ${CFLAGS} $(SUB) -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz -o ${NAME} 
 
 clean :
 	rm -f $(OBJ)

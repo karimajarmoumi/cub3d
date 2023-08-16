@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 20:04:17 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:05:03 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,10 @@ void readMap(char *fileName, t_map *map)
     if(!map->map_height)
         print_error("there is no map");
     fillArray(map, &player,fileName);
-    //displayArray(map->map);
+    displayArray(map->map);
+   // printf("%d  %d\n", map->player_pos.y, map->player_pos.x);
     flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
-   // displayArray(player.map_cpy);
+    displayArray(player.map_cpy);
 }
 
 

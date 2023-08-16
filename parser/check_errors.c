@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:50:20 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 19:41:08 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/16 20:25:15 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ void check_player(t_player *player,char *line, t_map *map)
          {
             if (line[i] == player->player_symbol)
                 player->count_player++;
-            if (player->count_player > 1 || (line[i] != WALL && line[i] != EMPTY &&
-                line[i]!= player->player_symbol && line[i] != SPACE))
-                print_error("wrong character or you duplicated player");
+            if(player->count_player > 1)
+                print_error("there is an error in counting player");
+            if ((line[i] != WALL && line[i] != EMPTY && line[i]!= player->player_symbol && line[i] != SPACE))
+                print_error("wrong character");
         }
         i++;
     }

@@ -6,13 +6,14 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:27 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 11:34:48 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:45:34 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUBE_H
 #define CUBE_H
 
+#include <mlx.h>
 #include <stdio.h>
 #include<stdbool.h>
 #include <unistd.h>
@@ -23,14 +24,28 @@
 #define WALL '1'
 #define EMPTY '0'
 #define SPACE ' '
+#define X 60
 #define PLAYER_W 'W'
 #define PLAYER_E 'E'
 #define PLAYER_S 'S'
 #define PLAYER_N 'N'
 #define MIN_RANGE 0
 #define MAX_RANGE 255
-#define WINDOW_WIDTH 1920
-#define WINDOW_HEIGHT  1080
+#define WALL_IMG_PATH "wall.img"
+#define WINDOW_WIDTH    25
+#define WINDOW_HEIGHT  6
+
+typedef struct s_mlx_data
+{
+    void    *mlx;
+    void    *win;
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+}t_data;
+
 
 typedef struct  s_player
 {
@@ -63,6 +78,7 @@ typedef struct  s_map
     char        **map;
     t_args      **args;
     t_position  player_pos;
+	void	    *mlx_img_1;
     
 } t_map;
 
