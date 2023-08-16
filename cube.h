@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   ../cube.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-#define PARSE_H
+#ifndef CUBE_H
+#define CUBE_H
 
 #include <stdio.h>
 #include<stdbool.h>
@@ -87,7 +87,10 @@ int	    ft_strcmp(char *s1, char *s2);
 int     ft_atoi(const char *str);
 int     count_words(char **str);
 int		ft_isdigit(int c);
-int     is_line_ofMap(char *line);
-
-
+char    **split_identifier(char *line,char **key_value,int *identifier);
+int     is_identifier(char *key_value);
+void    affect_value(t_args **arg,char *key,char *value);
+void    check_identifier(char *line, t_map *map,int *count);
+void    check_color_rang(char **key_value);
+void check_color_rang(char **key_value);
 #endif

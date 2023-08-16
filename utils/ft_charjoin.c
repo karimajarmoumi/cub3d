@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../parse.h"
+#include "../cube.h"
 
 char	*ft_charjoin(char const *s1, char character)
 {
