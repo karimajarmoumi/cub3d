@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:05 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 16:21:00 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/16 21:27:04 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void fillArray(t_map *map, t_player *player, char *fileName)
     count = 0;
     fd = open (fileName,O_RDONLY);
     line = ft_strdup("");
-    
     map->map = malloc(sizeof(char*) * (map->map_height + 1));
     player->map_cpy = malloc(sizeof(char*) * (map->map_height + 3));
     while(line)
@@ -85,4 +84,5 @@ void fillArray(t_map *map, t_player *player, char *fileName)
     }
     map->map[i] =  NULL;
     player->map_cpy[j] =  NULL;
+    displayArray(player->map_cpy);
 }

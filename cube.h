@@ -32,8 +32,20 @@
 #define MIN_RANGE 0
 #define MAX_RANGE 255
 #define WALL_IMG_PATH "wall.img"
-#define WINDOW_WIDTH 1920
-#define WINDOW_HEIGHT  1080
+#define WINDOW_WIDTH    25
+#define WINDOW_HEIGHT  6
+
+typedef struct s_mlx_data
+{
+    void    *mlx;
+    void    *win;
+    void    *img;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+}t_data;
+
 
 typedef struct  s_player
 {
