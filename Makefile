@@ -3,9 +3,9 @@ NAME = cube
 CC = clang
 
 CFLAGS = -Wall -Wextra -Werror #-fsanitize=address
-SUB = *.c ./utils/*.c ./parser/*.c
+SUB = *.c ./utils/*.c ./parser/*.c ./raycasting/*.c
 
-OBJ =  *.o ./utils/*.o ./parser/*.o
+OBJ =  *.o ./utils/*.o ./parser/*.o ./raycasting/*.o
 
 all : $(NAME)
 

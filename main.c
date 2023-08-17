@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/16 21:26:58 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/17 20:28:54 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void init_data_mlx(t_data *data)
     if (!data->addr)
         print_error("error to get the memory address for the pixel data");
 }
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -36,17 +37,17 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-
 void display_frame(t_data *data, t_map *map, int i, int j)
 {
     int y;
     int x;
     int wall_color;
     int player_color;
-
+    int space_color;
+    (void)map;
     wall_color = 0x3333FF;
-    player_color = 0x99FF99;
-    
+    player_color = 0xFF0000;
+    space_color = 0x008000;
     y = 0; 
     while (y < 60)
     {
@@ -56,9 +57,11 @@ void display_frame(t_data *data, t_map *map, int i, int j)
             if (map->map[i][j] == WALL)
                 my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), wall_color);
             else if (map->map[i][j] == PLAYER_N)
-                my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), player_color);
+           {
+               my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), player_color);
+           }
             x++;
-        }  
+        }
         y++;
     }
 }
@@ -75,6 +78,7 @@ void display_map(t_map *map, t_data *data)
     while (map && map->map[i])
     {         
         j = 0;
+        printf("|%s|",map->map[i]);
         while (map && map->map[i][j])
         {  
             display_frame(data, map, i, j);
@@ -82,8 +86,8 @@ void display_map(t_map *map, t_data *data)
         }
         i++;
     }
-    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    mlx_loop(data->mlx);
+    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 23);
+   
 }
 
 
@@ -98,10 +102,11 @@ int main(int ac, char **av)
         {
             readMap(av[1],&map);
             display_map(&map, &data);
+            DDA(&map,&data,23,0);
         }
         else
             print_error("wrong extension");
-            
+             mlx_loop(data.mlx);
       //  printf("%d %dwwwwoooow\n",map.floor_color,map.ceiling_color);
     }
     else
