@@ -24,7 +24,7 @@ void DDA(t_map *map,t_data *data, int target_x, int target_y)
     y = map->player_pos.y*60;
     while(i <= steps)
     {
-        mlx_pixel_put(data-> mlx,data->win,x+60,y,0xFFFF66);
+        mlx_pixel_put(data-> mlx,data->win,x + 60,y,0xFFFF66);
         x += (Xin);
         y += Yin;
         i++;  

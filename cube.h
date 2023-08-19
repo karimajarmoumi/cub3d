@@ -34,6 +34,22 @@
 #define WALL_IMG_PATH "wall.img"
 #define WINDOW_WIDTH    25
 #define WINDOW_HEIGHT  9
+#define LEFT  97
+#define RIGHT 100
+#define UP 119
+#define DOWN 115
+
+// typedef struct s_player_moves
+// {
+//     int radius;
+//     int turn_dir;
+//     int walk_dir;
+//     int rotation_angle;
+//     int move_speed;
+//     int rotate_speed;
+
+// }
+
 
 typedef struct s_mlx_data
 {
