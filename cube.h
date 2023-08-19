@@ -33,7 +33,23 @@
 #define MAX_RANGE 255
 #define WALL_IMG_PATH "wall.img"
 #define WINDOW_WIDTH    25
-#define WINDOW_HEIGHT  6
+#define WINDOW_HEIGHT  9
+#define LEFT  97
+#define RIGHT 100
+#define UP 119
+#define DOWN 115
+
+// typedef struct s_player_moves
+// {
+//     int radius;
+//     int turn_dir;
+//     int walk_dir;
+//     int rotation_angle;
+//     int move_speed;
+//     int rotate_speed;
+
+// }
+
 
 typedef struct s_mlx_data
 {
@@ -113,4 +129,6 @@ int     is_identifier(char *key_value);
 void    affect_value(t_args **arg,char *key,char *value);
 void    check_identifier(char *line, t_map *map,int *count);
 void check_color_rang(char **key_value, t_map *map);
+void DDA(t_map *map,t_data *data, int target_x, int target_y);
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif
