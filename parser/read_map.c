@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/16 21:05:03 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:02:17 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,14 @@ t_player* init_player(t_player *player)
 
 void init_map(t_player *player, t_map *map)
 {
+
     player = init_player(player);
     map->player_pos.x = -1;
     map->player_pos.y = -1;
     map->floor_color = 0;
     map->ceiling_color = 0;
+    map->data= malloc(sizeof(t_data));
+    init_data_mlx(map->data);
     map->args = malloc(sizeof(t_args*)*7);
     affect_value(&(map->args[0]),"NO",NULL);
     affect_value(&(map->args[1]),"SO",NULL);
@@ -49,6 +52,7 @@ void readMap(char *fileName, t_map *map)
 
     count = 0;
     init_map(&player, map);
+    
     line = ft_strdup("");
     fd = open (fileName, O_RDONLY);
     while (line)
@@ -76,7 +80,7 @@ void readMap(char *fileName, t_map *map)
     fillArray(map, &player,fileName);
     displayArray(map->map);
    // printf("%d  %d\n", map->player_pos.y, map->player_pos.x);
-    flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
+   // flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
     displayArray(player.map_cpy);
 }
 

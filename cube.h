@@ -38,17 +38,8 @@
 #define RIGHT 100
 #define UP 119
 #define DOWN 115
+#define ESC  65507
 
-// typedef struct s_player_moves
-// {
-//     int radius;
-//     int turn_dir;
-//     int walk_dir;
-//     int rotation_angle;
-//     int move_speed;
-//     int rotate_speed;
-
-// }
 
 
 typedef struct s_mlx_data
@@ -94,7 +85,7 @@ typedef struct  s_map
     char        **map;
     t_args      **args;
     t_position  player_pos;
-	void	    *mlx_img_1;
+	t_data     *data;
     
 } t_map;
 
@@ -128,7 +119,11 @@ char    **split_identifier(char *line,char **key_value,int *identifier);
 int     is_identifier(char *key_value);
 void    affect_value(t_args **arg,char *key,char *value);
 void    check_identifier(char *line, t_map *map,int *count);
-void check_color_rang(char **key_value, t_map *map);
-void DDA(t_map *map,t_data *data, int target_x, int target_y);
+void    check_color_rang(char **key_value, t_map *map);
+void    DDA(t_map *map,t_data *data, int target_x, int target_y);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void    init_data_mlx(t_data *data);
+void    draw_map(t_map *map, t_data *data);
+int	    close_win(t_map *data);
+int	    key_pressed(int code,t_map *map);
 #endif

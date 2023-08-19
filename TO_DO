@@ -9,7 +9,7 @@ to DO
 
 player not exist 
 
-
+check why esc doesn't work
 
         DOC 
 mlx_get_data_addr returns a char * address that represents
