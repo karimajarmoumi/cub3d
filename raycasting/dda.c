@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:20:00 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/19 12:20:37 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/20 11:12:12 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ void DDA(t_map *map,t_data *data, int target_x, int target_y)
     float Xin=0;
     float Yin =0;
     int steps;
-    int i =0;
+    int i = 0;
     float x ;
     float y ;
 
-    dx = target_x * 60   - map->player_pos.x * 60;
-    dy = target_y * 60 - map->player_pos.y * 60 ;
+    dx = target_x*60   - map->player_pos.x + 30;
+    dy = target_y*60 -map->player_pos.y + 30;
     steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     Xin = dx /(float)steps;
     Yin = dy /(float)steps;
-    x = map->player_pos.x*60;
-    y = map->player_pos.y*60;
+    x = map->player_pos.x + 30;
+    y = map->player_pos.y + 30;
     while(i <= steps)
     {
-        mlx_pixel_put(data-> mlx,data->win,x + 60,y,0xFFFF66);
-        x += Xin;
+        mlx_pixel_put(data-> mlx,data->win,x,y,0xFFFF66);
+        x += (Xin);
         y += Yin;
         i++;  
     }
