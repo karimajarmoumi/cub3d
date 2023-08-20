@@ -81,4 +81,5 @@ void draw_map(t_map *map, t_data *data)
         i++;
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+    DDA(map,map->data,0,0);
 }
