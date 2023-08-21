@@ -57,9 +57,14 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         y++;
     }
     my_mlx_pixel_put(data, 30 + (map->player_pos.x), 30 + (map->player_pos.y), 0x0000FF);
-    my_mlx_pixel_put(data, 31 + (map->player_pos.x ), 30 + (map->player_pos.y), 0x0000FF);
-    my_mlx_pixel_put(data, 30 + (map->player_pos.x ), 31 + (map->player_pos.y), 0x0000FF);
     my_mlx_pixel_put(data, 31 + (map->player_pos.x ), 31 + (map->player_pos.y), 0x0000FF);
+    my_mlx_pixel_put(data, 32 + (map->player_pos.x ), 32 + (map->player_pos.y), 0x0000FF);
+    my_mlx_pixel_put(data, 33 + (map->player_pos.x ), 33 + (map->player_pos.y), 0x0000FF);
+  
+
+
+    // my_mlx_pixel_put(data, 30 + (map->player_pos.x ), 31 + (map->player_pos.y), 0x0000FF);
+    // my_mlx_pixel_put(data, 31 + (map->player_pos.x ), 31 + (map->player_pos.y), 0x0000FF);
     
 }
 

@@ -4,7 +4,10 @@
 int	key_pressed(int code,t_map *map)
 {
     if (code == LEFT)
-        map->player_pos.x-=1;
+    {
+        map->player_pos.x -= 1;
+       // map->player_pos.x-=1;
+    }
     if(code == RIGHT)
         map->player_pos.x+=1;
     if(code == UP)

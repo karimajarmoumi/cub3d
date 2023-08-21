@@ -20,7 +20,8 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
-#include <mlx.h>
+#include <math.h>
+
 #define WALL '1'
 #define EMPTY '0'
 #define SPACE ' '
@@ -85,6 +86,8 @@ typedef struct  s_map
     char        **map;
     t_args      **args;
     t_position  player_pos;
+    float       angle;
+    float       speed;
 	t_data     *data;
     
 } t_map;
