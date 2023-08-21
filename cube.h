@@ -40,6 +40,12 @@
 #define UP 119
 #define DOWN 115
 #define ESC  65507
+#define UP_ROTATE 65362
+#define DOWN_ROTATE 65364
+#define RIGHT_ROTATE  65363
+#define LEFT_ROTATE  65361
+#define PI 3.14
+
 
 
 
@@ -68,6 +74,11 @@ typedef struct s_position
 {
     int x;
     int y;
+    int turn_x;
+    int turn_y;
+    float rotation_angle;
+    float rotation_speed;
+    int move_speed;
 }t_position;
 
 typedef struct s_args
@@ -86,10 +97,14 @@ typedef struct  s_map
     char        **map;
     t_args      **args;
     t_position  player_pos;
+<<<<<<< HEAD
     float       angle;
     float       speed;
 	t_data     *data;
     
+=======
+	t_data     *data;   
+>>>>>>> 69c3de42cca9cb338475482fc81eda3e1a4b6a72
 } t_map;
 
 char	*ft_strjoin(char const *s1, char const *s2);

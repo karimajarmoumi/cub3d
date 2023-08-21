@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
+/*   Updated: 2023/08/21 18:33:45 by kjarmoum         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../cube.h"
+
 void init_data_mlx(t_data *data)
 {
     data->mlx = mlx_init();
@@ -56,15 +68,12 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         }
         y++;
     }
-    my_mlx_pixel_put(data, 30 + (map->player_pos.x), 30 + (map->player_pos.y), 0x0000FF);
-    my_mlx_pixel_put(data, 31 + (map->player_pos.x ), 31 + (map->player_pos.y), 0x0000FF);
-    my_mlx_pixel_put(data, 32 + (map->player_pos.x ), 32 + (map->player_pos.y), 0x0000FF);
-    my_mlx_pixel_put(data, 33 + (map->player_pos.x ), 33 + (map->player_pos.y), 0x0000FF);
-  
-
-
-    // my_mlx_pixel_put(data, 30 + (map->player_pos.x ), 31 + (map->player_pos.y), 0x0000FF);
-    // my_mlx_pixel_put(data, 31 + (map->player_pos.x ), 31 + (map->player_pos.y), 0x0000FF);
+    int p = 0;
+    while(p < 20)
+    {
+        my_mlx_pixel_put(data, 30 + (map->player_pos.x), 25 + p + (map->player_pos.y), 0x0000FF);
+        p++;
+    }
     
 }
 
@@ -86,5 +95,5 @@ void draw_map(t_map *map, t_data *data)
         i++;
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    DDA(map,map->data,0,0);
+    DDA(map,map->data,map->player_pos.x + cos(map->player_pos.rotation_angle)*5,map->player_pos.y + sin(map->player_pos.rotation_angle)*5);
 }
