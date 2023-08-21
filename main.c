@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/21 18:33:20 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:39:21 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ int main(int ac, char **av)
 {
     t_map   map;
 
-    map.angle = 10;
-    map.speed = 0.1;
     if (ac == 2)
     {
         if (check_extension(av[1]) == true)
         {
             readMap(av[1],&map);
             draw_map(&map, (map.data));
-           
             mlx_hook(map.data->win, 2,1L<<0, key_pressed,&map);
             mlx_hook(map.data->win,17,0, close_win, &map);
             mlx_loop(map.data->mlx);
