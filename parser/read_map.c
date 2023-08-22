@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/21 20:11:14 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:17:57 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_position init_p(t_position *player)
     player->y = -1;
     player->turn_x = 0;
     player->turn_y = 0;
-    player->rotation_angle = PI/2;
+    player->rotation_angle =  PI/2;
     player->rotation_speed = 45*(PI/180);
     player->move_speed = 5;
     
@@ -63,7 +63,6 @@ void readMap(char *fileName, t_map *map)
 
     count = 0;
     init_map(&player, map);
-    
     line = ft_strdup("");
     fd = open (fileName, O_RDONLY);
     while (line)
@@ -90,8 +89,7 @@ void readMap(char *fileName, t_map *map)
         print_error("there is no map");
     fillArray(map, &player,fileName);
     displayArray(map->map);
-   // printf("%d  %d\n", map->player_pos.y, map->player_pos.x);
-   // flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
+   //flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
     displayArray(player.map_cpy);
 }
 

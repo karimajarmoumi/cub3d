@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/22 14:47:49 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:25:15 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         }
         y++;
     }
-    int p = 0;
+    int p = 0; 
     while(p < 20)
     {
         my_mlx_pixel_put(data,  p * cos(map->player_pos.rotation_angle) + (map->player_pos.x), p * sin(map->player_pos.rotation_angle) + (map->player_pos.y), 0x0000FF);
@@ -94,6 +94,7 @@ void draw_map(t_map *map, t_data *data)
         i++;
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    //  DDA(map,map->data,map->player_pos.x + cos(map->player_pos.rotation_angle)*20,
-      // map->player_pos.y + sin(map->player_pos.rotation_angle)*20);
+    DDA(map, map->data, map->player_pos.x * cos(map->player_pos.rotation_angle) 
+        - map->player_pos.y * sin(map->player_pos.rotation_angle),
+         map->player_pos.y * cos(map->player_pos.rotation_angle) + map->player_pos.x *sin(map->player_pos.rotation_angle));
 }

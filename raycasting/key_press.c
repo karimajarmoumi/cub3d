@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/22 16:18:19 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/22 16:24:50 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	key_pressed(int code,t_map *map)
     else if(code == DOWN)
         map->player_pos.turn_y = 1;
     else if(code == ESC)
-        print_error("you exit the program");
+       print_error("you exit the program");
     else if(code == LEFT_ROTATE)
         map->player_pos.turn_x = -1;
     else if(code == RIGHT_ROTATE)
