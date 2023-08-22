@@ -39,7 +39,7 @@
 #define RIGHT 100
 #define UP 119
 #define DOWN 115
-#define ESC  65507
+#define ESC  65307 
 #define UP_ROTATE 65362
 #define DOWN_ROTATE 65364
 #define RIGHT_ROTATE  65363
@@ -47,6 +47,8 @@
 #define PI 3.14
 #define FRAME_WIDTH  60
 #define FRAME_HEIGHT 60
+#define ANGLE_FOV PI/3
+#define HALF_FOV  ANGLE_FOV/2
 
 typedef struct s_mlx_data
 {
@@ -80,6 +82,7 @@ typedef struct s_position
     float rotation_angle;
     float rotation_speed;
     int move_speed;
+    int half_fov;
 }t_position;
 
 typedef struct s_args

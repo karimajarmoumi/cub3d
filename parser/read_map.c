@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/22 15:17:57 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/22 22:06:05 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_position init_p(t_position *player)
     player->y = -1;
     player->turn_x = 0;
     player->turn_y = 0;
-    player->rotation_angle =  PI/2;
-    player->rotation_speed = 45*(PI/180);
+    player->rotation_angle =  0 * (PI/180);
+    player->rotation_speed = 10*(PI/180);
     player->move_speed = 5;
     
     return *player;

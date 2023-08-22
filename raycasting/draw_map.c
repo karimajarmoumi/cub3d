@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/22 16:25:15 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/22 23:59:22 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void init_data_mlx(t_data *data)
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+    int nx = x;
+    int ny = y;
+	dst = data->addr + (ny * data->line_length + nx * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -57,23 +58,17 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         while (x < FRAME_WIDTH)
         {
             if (map->map[i][j] == WALL)
-                my_mlx_pixel_put(data, x + (FRAME_WIDTH  * j), y + (i * FRAME_HEIGHT), wall_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH  *j), y + (i * FRAME_HEIGHT), wall_color);
             else if (map->map[i][j] == EMPTY || map->map[i][j] == PLAYER_N)
             { 
-                my_mlx_pixel_put(data, x + (FRAME_WIDTH  * j), y + (i * FRAME_HEIGHT), floor_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH *j), y + (i * FRAME_HEIGHT), floor_color);
             }
             if(y == 59 || x== 59)
-                my_mlx_pixel_put(data, x + (FRAME_WIDTH * j), y + (i * FRAME_HEIGHT), sep_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH  *j), y + (i * FRAME_HEIGHT), sep_color);
             x++;
         }
         y++;
     }
-    int p = 0; 
-    while(p < 20)
-    {
-        my_mlx_pixel_put(data,  p * cos(map->player_pos.rotation_angle) + (map->player_pos.x), p * sin(map->player_pos.rotation_angle) + (map->player_pos.y), 0x0000FF);
-        p++;
-    } 
 }
 
 void draw_map(t_map *map, t_data *data)
@@ -93,8 +88,14 @@ void draw_map(t_map *map, t_data *data)
         }
         i++;
     }
-    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    DDA(map, map->data, map->player_pos.x * cos(map->player_pos.rotation_angle) 
-        - map->player_pos.y * sin(map->player_pos.rotation_angle),
-         map->player_pos.y * cos(map->player_pos.rotation_angle) + map->player_pos.x *sin(map->player_pos.rotation_angle));
+    double start = map->player_pos.rotation_angle - 30*(PI/180);
+    double end =  map->player_pos.rotation_angle + 30*(PI /180);
+    while(start < end)
+    {
+        DDA(map, data, map->player_pos.x + cos(start)*100, map->player_pos.y + sin(start)*100);
+        start += 60*(PI/180)/60;
+    }
+    // Draw3D();
+    // Draw2D();
+    mlx_put_image_to_window(data->mlx, data->win, data->img,0,0);    
 }
