@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:50:20 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/21 19:51:57 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:47:28 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void check_player_symbol(char character, t_player *player, int x, t_map *map)
         player->player_symbol= character;
         player->flag_on = 1;
         player->count_player++;
-        map->player_pos.x = (x*60) + cos(3*(PI/2));
-        map->player_pos.y = (map->map_height*60) + sin(3*(PI/2));
+        map->player_pos.x = (x * FRAME_WIDTH) + cos(3 * (PI / 2)) + 30;
+        map->player_pos.y = (map->map_height * FRAME_HEIGHT) + sin(3 * (PI / 2)) + 30;
     }
     if (character != WALL && character != EMPTY && character != PLAYER_W && character !=PLAYER_E &&
             character != PLAYER_S && character!=PLAYER_N && character != SPACE)

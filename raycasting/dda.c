@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:20:00 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/20 11:12:12 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:23:41 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void DDA(t_map *map,t_data *data, int target_x, int target_y)
     float x ;
     float y ;
 
-    dx = target_x*60   - map->player_pos.x + 30;
-    dy = target_y*60 -map->player_pos.y + 30;
+    dx = target_x   - map->player_pos.x + 30;
+    dy = target_y -map->player_pos.y + 30;
     steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
     Xin = dx /(float)steps;
     Yin = dy /(float)steps;
@@ -34,7 +34,7 @@ void DDA(t_map *map,t_data *data, int target_x, int target_y)
     y = map->player_pos.y + 30;
     while(i <= steps)
     {
-        mlx_pixel_put(data-> mlx,data->win,x,y,0xFFFF66);
+        mlx_pixel_put(data-> mlx,data->win,x ,y,0xFFFF66);
         x += (Xin);
         y += Yin;
         i++;  

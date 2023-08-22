@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/21 20:03:18 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:47:49 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ void display_frame(t_data *data, t_map *map, int i, int j)
     floor_color = 0xFFFFFF;
     sep_color = 0x000000;
     y = 0; 
-    while (y < 60)
+    while (y < FRAME_HEIGHT)
     {
         x = 0;
-        while (x < 60)
+        while (x < FRAME_WIDTH)
         {
             if (map->map[i][j] == WALL)
-                my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), wall_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH  * j), y + (i * FRAME_HEIGHT), wall_color);
             else if (map->map[i][j] == EMPTY || map->map[i][j] == PLAYER_N)
             { 
-                my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), floor_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH  * j), y + (i * FRAME_HEIGHT), floor_color);
             }
             if(y == 59 || x== 59)
-                my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), sep_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH * j), y + (i * FRAME_HEIGHT), sep_color);
             x++;
         }
         y++;
@@ -71,10 +71,9 @@ void display_frame(t_data *data, t_map *map, int i, int j)
     int p = 0;
     while(p < 20)
     {
-        my_mlx_pixel_put(data, 30 + p * cos(map->player_pos.rotation_angle) + (map->player_pos.x), 25 + p * sin(map->player_pos.rotation_angle) + (map->player_pos.y), 0x0000FF);
+        my_mlx_pixel_put(data,  p * cos(map->player_pos.rotation_angle) + (map->player_pos.x), p * sin(map->player_pos.rotation_angle) + (map->player_pos.y), 0x0000FF);
         p++;
-    }
-    
+    } 
 }
 
 void draw_map(t_map *map, t_data *data)
@@ -95,6 +94,6 @@ void draw_map(t_map *map, t_data *data)
         i++;
     }
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-   //  DDA(map,map->data,map->player_pos.x + cos(map->player_pos.rotation_angle)*20,
-     //    map->player_pos.y + sin(map->player_pos.rotation_angle)*20);
+    //  DDA(map,map->data,map->player_pos.x + cos(map->player_pos.rotation_angle)*20,
+      // map->player_pos.y + sin(map->player_pos.rotation_angle)*20);
 }

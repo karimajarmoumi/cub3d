@@ -45,6 +45,8 @@
 #define RIGHT_ROTATE  65363
 #define LEFT_ROTATE  65361
 #define PI 3.14
+#define FRAME_WIDTH  60
+#define FRAME_HEIGHT 60
 
 typedef struct s_mlx_data
 {
