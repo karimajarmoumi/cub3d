@@ -6,21 +6,23 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/22 23:59:22 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:57:26 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
-void init_data_mlx(t_data *data)
+void init_data_mlx(t_map *map)
 {
+    t_data *data = map->data;
+    
     data->mlx = mlx_init();
     if (!data->mlx)
         print_error("error mlx_init");
-    data->win = mlx_new_window(data->mlx, WINDOW_WIDTH * 60, WINDOW_HEIGHT * 60, "./cub3d");
+    data->win = mlx_new_window(data->mlx, map->max_width * 60,map->map_height* 60, "./cub3d");
     if (!data->win)
         print_error("Window can't open try again");
-    data->img = mlx_new_image(data->mlx, WINDOW_WIDTH * 60, WINDOW_HEIGHT * 60);
+    data->img = mlx_new_image(data->mlx, map->max_width * 60, map->map_height * 60);
     if (!data->img)
         print_error("error to create image");   
     data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
@@ -59,7 +61,7 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         {
             if (map->map[i][j] == WALL)
                 my_mlx_pixel_put(data, x + (FRAME_WIDTH  *j), y + (i * FRAME_HEIGHT), wall_color);
-            else if (map->map[i][j] == EMPTY || map->map[i][j] == PLAYER_N)
+            else if (map->map[i][j] == EMPTY || map->map[i][j] == map->player_pos.player_symbol)
             { 
                 my_mlx_pixel_put(data, x + (FRAME_WIDTH *j), y + (i * FRAME_HEIGHT), floor_color);
             }
