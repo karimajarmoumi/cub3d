@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:50:20 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/22 15:22:25 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/22 20:53:07 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void check_player_symbol(char character, t_player *player, int x, t_map *map)
         player->player_symbol= character;
         player->flag_on = 1;
         player->count_player++;
-        map->player_pos.x = (x*60) + 30 + cos(3*(PI/2));
-        map->player_pos.y = (map->map_height*60) + 30 + sin(3*(PI/2));
+        map->player_pos.x = (x*60) + cos(3*(PI/2));
+        map->player_pos.y = (map->map_height*60) + sin(3*(PI/2));
     }
     if (character != WALL && character != EMPTY && character != PLAYER_W && character !=PLAYER_E &&
             character != PLAYER_S && character!=PLAYER_N && character != SPACE)
