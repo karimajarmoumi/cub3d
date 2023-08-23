@@ -84,20 +84,19 @@ void check_color_rang(char **key_value, t_map *map)
             range = ft_split(key_value[1], ',');
             if(!ft_isdigit(key_value[1][len -1]) || count_words(range) != 3)
                     print_error("error in range color"); 
-                while(range[i])
-                {
-                    if(i >= 3) 
-                        print_error("these is not a RGB forme");
-                    num = ft_atoi(range[i]);
-                    if(num < MIN_RANGE ||  num > MAX_RANGE)
-                        print_error("error in range color");
-                    i++;
-                }
-                if(!ft_strcmp(key_value[0],"F"))
-                    store_color_value(&(map->floor_color), range[0],range[1],range[2]);
-                else if(!ft_strcmp(key_value[0], "C"))
-                    store_color_value(&(map->ceiling_color), range[0],range[1],range[2]);
-               
+            while(range[i])
+            {
+                if(i >= 3) 
+                    print_error("these is not a RGB forme");
+                num = ft_atoi(range[i]);
+                if(num < MIN_RANGE ||  num > MAX_RANGE)
+                    print_error("error in range color");
+                i++;
+            }
+            if(!ft_strcmp(key_value[0],"F"))
+                store_color_value(&(map->floor_color), range[0],range[1],range[2]);
+            else if(!ft_strcmp(key_value[0], "C"))
+                store_color_value(&(map->ceiling_color), range[0],range[1],range[2]);
        }
 }
 
@@ -115,21 +114,21 @@ void  check_identifier(char *line, t_map *map, int *count)
     if (is_identifier == 1)
     {
         if(count_words(key_value) != 2)
-              print_error("identifier doesn't work as expected");
-            while(map->args[i] && map->args[i]->key)
+            print_error("identifier doesn't work as expected");
+        while(map->args[i] && map->args[i]->key)
+        {
+            if(!strcmp(key_value[0],map->args[i]->key))
             {
-                if(!strcmp(key_value[0],map->args[i]->key))
-                {
-                    map->args[i]->flag++;
-                    affect_value(&(map->args[0]), NULL, key_value[1]);
-                    check_color_rang(key_value,map);
-                  
-                }
-                if(map->args[i]->flag==1)
-                    (*count)++;
-                if(map->args[i]->flag > 1)
-                    print_error("a path is duplicated");
-                i++;
+                map->args[i]->flag++;
+                affect_value(&(map->args[0]), NULL, key_value[1]);
+                check_color_rang(key_value,map);
+                
             }
+            if(map->args[i]->flag==1)
+                (*count)++;
+            if(map->args[i]->flag > 1)
+                print_error("a path is duplicated");
+            i++;
+        }
     }
 }

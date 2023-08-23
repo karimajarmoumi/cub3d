@@ -17,15 +17,15 @@ void DDA(t_map *map,t_data *data, int target_x, int target_y)
 {
     int dx;
     int dy;
-    float Xin=0; 
+    float Xin=0;
     float Yin =0;
     int steps;
     int i = 0;
     float x ;
     float y ;
 
-    dx = target_x   - map->player_pos.x;
-    dy = target_y - map->player_pos.y;
+    dx = (target_x) - map->player_pos.x;
+    dy = (target_y) - map->player_pos.y;
     steps = abs(dx) > abs(dy) ? abs(dx) : abs(dy);
  
     Xin = dx /(float)steps;

@@ -44,7 +44,7 @@ void check_player(t_player *player,char *line, t_map *map)
     while(line && line[i])
     {
          if (player->flag_on == 0)
-             check_player_symbol(line[i], player, i,map);
+            check_player_symbol(line[i], player, i,map);
          else
          {
             if (line[i] == map->player_pos.player_symbol)
