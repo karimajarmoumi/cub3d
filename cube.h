@@ -32,19 +32,22 @@
 #define PLAYER_N 'N'
 #define MIN_RANGE 0
 #define MAX_RANGE 255
-#define WALL_IMG_PATH "wall.img"
-#define WINDOW_WIDTH    25
-#define WINDOW_HEIGHT  9
 #define LEFT  97
 #define RIGHT 100
 #define UP 119
 #define DOWN 115
-#define ESC  65507
-#define UP_ROTATE 65362
-#define DOWN_ROTATE 65364
 #define RIGHT_ROTATE  65363
 #define LEFT_ROTATE  65361
+#define ESC  65307
 #define PI 3.14
+#define FRAME_WIDTH  60
+#define FRAME_HEIGHT 60
+#define NORD_ANGLE  270 * (PI/180)
+#define EAST_ANGLE 0 * (PI/180)
+#define SOUTH_ANGLE 90 * (PI/180)
+#define WEST_ANGLE 180 * (PI/180)
+#define ANGLE_FOV PI/3
+#define HALF_FOV  ANGLE_FOV/2
 
 typedef struct s_mlx_data
 {
@@ -57,10 +60,9 @@ typedef struct s_mlx_data
     int     endian;
 }t_data;
 
-
 typedef struct  s_player
 {
-    char    player_symbol;
+    
     int     flag_on;
     int     count_player;
     char    **map_cpy;
@@ -71,13 +73,13 @@ typedef struct s_position
 {
     float x;
     float y;
-    //rotation
+    char  player_symbol;
     int turn_x;
-    //walk
     int turn_y;
     float rotation_angle;
     float rotation_speed;
     int move_speed;
+    int half_fov;
 }t_position;
 
 typedef struct s_args
@@ -91,6 +93,7 @@ typedef struct  s_map
 {
     int         map_height;
     int         total_height;
+    int         max_width;
     int         floor_color;
     int         ceiling_color;
     char        **map;
@@ -133,7 +136,7 @@ void    check_identifier(char *line, t_map *map,int *count);
 void    check_color_rang(char **key_value, t_map *map);
 void    DDA(t_map *map,t_data *data, int target_x, int target_y);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void    init_data_mlx(t_data *data);
+void    init_data_mlx(t_map *map);
 void    draw_map(t_map *map, t_data *data);
 int	    close_win(t_map *data);
 int	    key_pressed(int code,t_map *map);

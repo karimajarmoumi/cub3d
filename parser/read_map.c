@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/22 15:17:57 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:59:16 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,18 @@ t_position init_p(t_position *player)
     player->y = -1;
     player->turn_x = 0;
     player->turn_y = 0;
-    player->rotation_angle =  PI/2;
-    player->rotation_speed = 45*(PI/180);
+    player->rotation_speed = 10 * (PI/180);
     player->move_speed = 5;
-    
     return *player;
 }
+
 void init_map(t_player *player, t_map *map)
 {
-
     player = init_player(player);
     map->player_pos = init_p(&map->player_pos);
     map->floor_color = 0;
     map->ceiling_color = 0;
     map->data= malloc(sizeof(t_data));
-    init_data_mlx(map->data);
     map->args = malloc(sizeof(t_args*)*7);
     affect_value(&(map->args[0]),"NO",NULL);
     affect_value(&(map->args[1]),"SO",NULL);
@@ -50,9 +47,22 @@ void init_map(t_player *player, t_map *map)
     affect_value(&(map->args[5]),"C",NULL);
     map->args[6]=NULL;   
     map->map_height = 0;
+    map-> max_width = 0;
     map-> total_height = 0;
 }
 
+void store_map_mesurer(t_map *map,char *line)
+{
+    int current_width; 
+    
+    map->map_height++;
+    if(line)
+    {
+        current_width = ft_strlen(line);
+        if(map->max_width < current_width)
+            map->max_width = current_width;
+    }
+}
 
 void readMap(char *fileName, t_map *map)
 {
@@ -76,11 +86,10 @@ void readMap(char *fileName, t_map *map)
         else if(count == 6 && player.map_begin == 1)
         {
             check_player(&player, line, map);
-            map->map_height++;
-        }
+            store_map_mesurer(map,line);
+        }   
         map->total_height++;
     }
-  
     ft_free(line);
     if (count < 6)
         print_error("there is a problem with identifier");
@@ -88,9 +97,9 @@ void readMap(char *fileName, t_map *map)
     if(!map->map_height)
         print_error("there is no map");
     fillArray(map, &player,fileName);
-    displayArray(map->map);
+    //displayArray(map->map);
    //flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
-    displayArray(player.map_cpy);
+    //displayArray(player.map_cpy);
 }
 
 

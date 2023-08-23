@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/22 15:09:46 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/08/23 11:57:26 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
-void init_data_mlx(t_data *data)
+void init_data_mlx(t_map *map)
 {
+    t_data *data = map->data;
+    
     data->mlx = mlx_init();
     if (!data->mlx)
         print_error("error mlx_init");
-    data->win = mlx_new_window(data->mlx, WINDOW_WIDTH * 60, WINDOW_HEIGHT * 60, "./cub3d");
+    data->win = mlx_new_window(data->mlx, map->max_width * 60,map->map_height* 60, "./cub3d");
     if (!data->win)
         print_error("Window can't open try again");
-    data->img = mlx_new_image(data->mlx, WINDOW_WIDTH * 60, WINDOW_HEIGHT * 60);
+    data->img = mlx_new_image(data->mlx, map->max_width * 60, map->map_height * 60);
     if (!data->img)
         print_error("error to create image");   
     data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
@@ -32,8 +34,9 @@ void init_data_mlx(t_data *data)
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+    int nx = x;
+    int ny = y;
+	dst = data->addr + (ny * data->line_length + nx * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
@@ -51,30 +54,23 @@ void display_frame(t_data *data, t_map *map, int i, int j)
     floor_color = 0xFFFFFF;
     sep_color = 0x000000;
     y = 0; 
-    while (y < 60)
+    while (y < FRAME_HEIGHT)
     {
         x = 0;
-        while (x < 60)
+        while (x < FRAME_WIDTH)
         {
             if (map->map[i][j] == WALL)
-                my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), wall_color);
-            else if (map->map[i][j] == EMPTY || map->map[i][j] == PLAYER_N)
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH  *j), y + (i * FRAME_HEIGHT), wall_color);
+            else if (map->map[i][j] == EMPTY || map->map[i][j] == map->player_pos.player_symbol)
             { 
-                my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), floor_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH *j), y + (i * FRAME_HEIGHT), floor_color);
             }
             if(y == 59 || x== 59)
-                my_mlx_pixel_put(data, x + (60  *j), y + (i * 60), sep_color);
+                my_mlx_pixel_put(data, x + (FRAME_WIDTH  *j), y + (i * FRAME_HEIGHT), sep_color);
             x++;
         }
         y++;
     }
-    int p = 0; 
-    while(p < 20)
-    {
-        my_mlx_pixel_put(data, p * cos(map->player_pos.rotation_angle) + (map->player_pos.x), p * sin(map->player_pos.rotation_angle) + (map->player_pos.y), 0x0000FF);
-        p++;
-    }
-    
 }
 
 void draw_map(t_map *map, t_data *data)
@@ -94,8 +90,14 @@ void draw_map(t_map *map, t_data *data)
         }
         i++;
     }
-    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
-    DDA(map, map->data, map->player_pos.x * cos(map->player_pos.rotation_angle) 
-        - map->player_pos.y * sin(map->player_pos.rotation_angle),
-         map->player_pos.y * cos(map->player_pos.rotation_angle) + map->player_pos.x *sin(map->player_pos.rotation_angle));
+    double start = map->player_pos.rotation_angle - 30*(PI/180);
+    double end =  map->player_pos.rotation_angle + 30*(PI /180);
+    while(start < end)
+    {
+        DDA(map, data, map->player_pos.x + cos(start)*100, map->player_pos.y + sin(start)*100);
+        start += 60*(PI/180)/60;
+    }
+    // Draw3D();
+    // Draw2D();
+    mlx_put_image_to_window(data->mlx, data->win, data->img,0,0);    
 }
