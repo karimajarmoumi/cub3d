@@ -72,14 +72,38 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         y++;
     }
 }
+void draw_rays(t_map map, t_data data, double start, double end)
+{
+    double x;
+    double y;
+
+    while (start < end)
+    {
+        x = map.player_pos.x;
+        y = map.player_pos.y;
+        while (1)
+        {
+            if (map.map[(int)y / 60][(int)x / 60] == WALL)
+                break;
+            my_mlx_pixel_put(&data, x , y, 0xff0000);
+            x += cos(start);
+            y += sin(start);
+        }
+        start += 60*(PI/180)/180;
+    }
+}
 
 void draw_map(t_map *map, t_data *data)
 {
     int i;
     int j;
+    double start;
+    double end;
 
     j = 0;
     i = 0;
+    start = map->player_pos.rotation_angle - 30*(PI/180);
+    end = map->player_pos.rotation_angle + 30*(PI /180);
     while (map && map->map[i])
     {  
         j = 0;
@@ -90,14 +114,8 @@ void draw_map(t_map *map, t_data *data)
         }
         i++;
     }
-    double start = map->player_pos.rotation_angle - 30*(PI/180);
-    double end =  map->player_pos.rotation_angle + 30*(PI /180);
-    while(start < end)
-    {
-        DDA(map, data, map->player_pos.x + cos(start)*100, map->player_pos.y + sin(start)*100);
-        start += 60*(PI/180)/60;
-    }
+    draw_rays(*map, *data, start, end);
     // Draw3D();
     // Draw2D();
-    mlx_put_image_to_window(data->mlx, data->win, data->img,0,0);    
+    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);        
 }
