@@ -28,6 +28,5 @@ bool check_extension(char *fileName)
         extensionLen--;
         len--;
     }
-    free(extension);
     return true;
 }

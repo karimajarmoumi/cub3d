@@ -46,7 +46,7 @@
 #define EAST_ANGLE 0 * (PI/180)
 #define SOUTH_ANGLE 90 * (PI/180)
 #define WEST_ANGLE 180 * (PI/180)
-#define ANGLE_FOV PI/3
+#define ANGLE_FOV PI/3 
 #define HALF_FOV  ANGLE_FOV/2
 
 typedef struct t_list

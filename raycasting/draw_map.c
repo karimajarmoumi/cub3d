@@ -73,47 +73,56 @@ void display_frame(t_data *data, t_map *map, int i, int j)
     }
 }
 
-t_ray* ray_data (t_map map,int x, int y,int distance)
+t_ray* ray_data (int x, int y,int distance)
 {
-    (void)x;
-    (void)y;
-    (void)distance;
     t_ray *ray =NULL;
-   ray=(t_ray*) map.rays->content;
-   if(x >= 0)
-       ray->x = x;
-   printf("heere\n");
-   if(y >= 0)
-       ray->y = y;
-   if(distance >= 0)
-       ray->distance = distance;
+    ray = malloc(sizeof(t_ray));
+
+    if(x >= 0)
+        ray->x = x;
+    if(y >= 0)
+        ray->y = y;
+    if(distance >= 0)
+        ray->distance = distance;
     return ray;
 }
 
-void draw_rays(t_map map, t_data data, double start, double end)
+void draw_rays(t_map *map, t_data data, double start, double end)
 {
     double x;
     double y;
-    
-    map.rays->content = malloc(sizeof(t_ray));
+
+    map->rays = NULL;
     while (start < end)
     {
-        x = map.player_pos.x;
-        y = map.player_pos.y;
+        x = map->player_pos.x;
+        y = map->player_pos.y;
         while (1)
         {
-            if (map.map[(int)y / 60][(int)x / 60] == WALL)
+            if (map->map[(int)y / 60][(int)x / 60] == WALL)
             {
-                ft_lstadd_back(&map.rays,ft_lstnew((t_ray*)ray_data(map,x,y,-1)));
+                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(x,y,-1)));
                 break;
             }
             my_mlx_pixel_put(&data, x , y, 0xff0000);
             x += cos(start);
             y += sin(start);
         }
-        start += ANGLE_FOV / (map.max_width * 60);
+        start += ANGLE_FOV / (map->max_width * 60);
     }
 }
+void display_list(t_list *list)
+{
+    t_ray *ray;
+
+    while (list)
+    {
+        ray = (t_ray*)list->content;
+        printf("%f %f\n", ray->x,ray->y);
+        list=list->next; 
+    }
+}
+
 void draw_map(t_map *map, t_data *data)
 {
     int i;
@@ -135,7 +144,8 @@ void draw_map(t_map *map, t_data *data)
         }
         i++;
     }
-    draw_rays(*map, *data, start, end);
+    draw_rays(map, *data, start, end);
+    display_list(map->rays);
     // Draw3D();
     // Draw2D();
     mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);        
