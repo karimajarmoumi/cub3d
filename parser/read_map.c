@@ -39,7 +39,7 @@ void init_map(t_player *player, t_map *map)
     map->ceiling_color = 0;
     map->data= malloc(sizeof(t_data));
     map->args = malloc(sizeof(t_args*)*7);
-    map->rays = malloc(sizeof(t_list));
+    // map->rays = malloc(sizeof(t_list));
     affect_value(&(map->args[0]),"NO",NULL);
     affect_value(&(map->args[1]),"SO",NULL);
     affect_value(&(map->args[2]),"WE",NULL);

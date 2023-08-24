@@ -34,7 +34,7 @@ void update_player_position(t_map *map, float turn_angle)
     if(is_wall(*map,new_x,new_y) == false)
     {
         map->player_pos.x = new_x;
-         map->player_pos.y = new_y;
+        map->player_pos.y = new_y;
     }
 }
 

@@ -19,7 +19,9 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	if (lst)
 	{
 		if (!*lst)
+		{
 			*lst = new;
+		}
 		else
 		{
 			last_node = ft_lstlast(*lst);
