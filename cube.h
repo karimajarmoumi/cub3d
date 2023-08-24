@@ -49,6 +49,18 @@
 #define ANGLE_FOV PI/3
 #define HALF_FOV  ANGLE_FOV/2
 
+typedef struct t_list
+{
+	void			*content;
+	struct t_list	*next;
+
+}					t_list;
+typedef struct s_ray
+{
+    float x;
+    float y;
+    float distance;
+}t_ray;
 typedef struct s_mlx_data
 {
     void    *mlx;
@@ -88,6 +100,7 @@ typedef struct s_args
     int     flag;
 }t_args;
 
+
 typedef struct  s_map
 {
     int         map_height;
@@ -99,7 +112,8 @@ typedef struct  s_map
     t_args      **args;
     t_position  player_pos;
 	t_data     *data;
-    
+    t_list     *rays;
+
 } t_map;
 
 char	*ft_strjoin(char const *s1, char const *s2);
@@ -139,4 +153,8 @@ void    init_data_mlx(t_map *map);
 void    draw_map(t_map *map, t_data *data);
 int	    close_win(t_map *data);
 int	    key_pressed(int code,t_map *map);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstnew(void *content);
+int	ft_lstsize(t_list *lst);
 #endif

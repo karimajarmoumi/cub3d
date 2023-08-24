@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/23 11:57:26 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/24 15:15:51 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,30 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         y++;
     }
 }
+
+t_ray* ray_data (t_map map,int x, int y,int distance)
+{
+    (void)x;
+    (void)y;
+    (void)distance;
+    t_ray *ray =NULL;
+   ray=(t_ray*) map.rays->content;
+   if(x >= 0)
+       ray->x = x;
+   printf("heere\n");
+   if(y >= 0)
+       ray->y = y;
+   if(distance >= 0)
+       ray->distance = distance;
+    return ray;
+}
+
 void draw_rays(t_map map, t_data data, double start, double end)
 {
     double x;
     double y;
-
+    
+    map.rays->content = malloc(sizeof(t_ray));
     while (start < end)
     {
         x = map.player_pos.x;
@@ -84,7 +103,10 @@ void draw_rays(t_map map, t_data data, double start, double end)
         while (1)
         {
             if (map.map[(int)y / 60][(int)x / 60] == WALL)
+            {
+                ft_lstadd_back(&map.rays,ft_lstnew((t_ray*)ray_data(map,x,y,-1)));
                 break;
+            }
             my_mlx_pixel_put(&data, x , y, 0xff0000);
             x += cos(start);
             y += sin(start);
