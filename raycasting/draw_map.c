@@ -89,10 +89,9 @@ void draw_rays(t_map map, t_data data, double start, double end)
             x += cos(start);
             y += sin(start);
         }
-        start += 60*(PI/180)/180;
+        start += ANGLE_FOV / (map.max_width * 60);
     }
 }
-
 void draw_map(t_map *map, t_data *data)
 {
     int i;

@@ -62,7 +62,6 @@ typedef struct s_mlx_data
 
 typedef struct  s_player
 {
-    
     int     flag_on;
     int     count_player;
     char    **map_cpy;
