@@ -80,7 +80,11 @@ typedef struct  s_player
     char    **map_cpy;
     int      map_begin;
 }t_player;
-
+typedef struct s_coord
+{
+    int x;
+    int y;
+}t_coord;
 typedef struct s_position
 {
     float x;
@@ -148,7 +152,7 @@ int     is_identifier(char *key_value);
 void    affect_value(t_args **arg,char *key,char *value);
 void    check_identifier(char *line, t_map *map,int *count);
 void    check_color_rang(char **key_value, t_map *map);
-void    DDA(t_map *map,t_data *data, int target_x, int target_y);
+void DDA(t_map *map,t_coord *pos , int target_x, int target_y);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    init_data_mlx(t_map *map);
 void    draw_map(t_map *map, t_data *data);

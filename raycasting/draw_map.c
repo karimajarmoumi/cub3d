@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/25 12:33:24 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/25 20:17:57 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ t_ray* ray_data (t_map map,int x, int y)
         ray->y = y;
     //ray->distance= abs((int)(map.player_pos.y - y));
     ray->distance =  abs((int)(y- map.player_pos.y)) / sin( FOV);
-    ray->projection_wall = (FRAME_HEIGHT * ((map.max_width /2) / tan(FOV / 2)))/ray->distance;
+    ray->projection_wall = (FRAME_HEIGHT * ((map.max_width*60 /2) / tan(FOV / 2)))/ray->distance;
     return ray;
 }
 
@@ -123,7 +123,26 @@ void display_list(t_list *list)
         list=list->next; 
     }
 }
-
+void draw_3d_view(t_map map)
+{
+    int map_center = map.map_height*60 / 2;
+    printf("bbbb%d\n", map.max_width);
+    t_coord pos;
+    t_ray *ray;
+    int i = 0;
+//  mlx_clear_window (map.data->mlx, map.data->win);
+    while(map.rays &&  i< map.max_width*60)
+    {
+        ray = (t_ray*)map.rays->content;
+        
+        pos.x = i;
+        pos.y = map_center - (ray->projection_wall/2);
+        printf("|%d %d|  |%d %f| %f\n",pos.x,pos.y,i,pos.y + (ray->projection_wall),ray->projection_wall);
+        DDA(&map,&pos,pos.x,pos.y + ray->projection_wall);
+        map.rays = map.rays->next;
+        i++;
+    }
+}
 void draw_map(t_map *map, t_data *data)
 {
     int i;
@@ -146,8 +165,16 @@ void draw_map(t_map *map, t_data *data)
         i++;
     }
     draw_rays(map, *data, start, end);
-    display_list(map->rays);
+    //display_list(map->rays);
+    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);      
+    mlx_clear_window (map->data->mlx, map->data->win);
+    data->img = mlx_new_image(data->mlx, map->max_width * 60, map->map_height * 60);
+    data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
+        &data->line_length, &data->endian);
+    map->data = data;
+    draw_3d_view(*map);
+    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);      
+
     // Draw3D();
     // Draw2D();
-    mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);        
 }
