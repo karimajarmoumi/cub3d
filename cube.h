@@ -46,8 +46,8 @@
 #define EAST_ANGLE 0 * (PI/180)
 #define SOUTH_ANGLE 90 * (PI/180)
 #define WEST_ANGLE 180 * (PI/180)
+#define FOV        60*(PI/180)
 #define ANGLE_FOV PI/3 
-#define HALF_FOV  ANGLE_FOV/2
 
 typedef struct t_list
 {
@@ -59,7 +59,8 @@ typedef struct s_ray
 {
     float x;
     float y;
-    float distance;
+    int distance;
+    float projection_wall;
 }t_ray;
 typedef struct s_mlx_data
 {
@@ -157,4 +158,5 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
 int	ft_lstsize(t_list *lst);
+int abs(int n);
 #endif

@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/24 15:15:51 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/08/25 12:33:24 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void display_frame(t_data *data, t_map *map, int i, int j)
     }
 }
 
-t_ray* ray_data (int x, int y,int distance)
+t_ray* ray_data (t_map map,int x, int y)
 {
     t_ray *ray =NULL;
     ray = malloc(sizeof(t_ray));
@@ -82,8 +82,9 @@ t_ray* ray_data (int x, int y,int distance)
         ray->x = x;
     if(y >= 0)
         ray->y = y;
-    if(distance >= 0)
-        ray->distance = distance;
+    //ray->distance= abs((int)(map.player_pos.y - y));
+    ray->distance =  abs((int)(y- map.player_pos.y)) / sin( FOV);
+    ray->projection_wall = (FRAME_HEIGHT * ((map.max_width /2) / tan(FOV / 2)))/ray->distance;
     return ray;
 }
 
@@ -101,11 +102,11 @@ void draw_rays(t_map *map, t_data data, double start, double end)
         {
             if (map->map[(int)y / 60][(int)x / 60] == WALL)
             {
-                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(x,y,-1)));
+                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,x,y)));
                 break;
             }
             my_mlx_pixel_put(&data, x , y, 0xff0000);
-            x += cos(start);
+            x +=  cos(start);
             y += sin(start);
         }
         start += ANGLE_FOV / (map->max_width * 60);
@@ -118,7 +119,7 @@ void display_list(t_list *list)
     while (list)
     {
         ray = (t_ray*)list->content;
-        printf("%f %f\n", ray->x,ray->y);
+        printf("%f %f %d\n", ray->x,ray->y,ray->distance);
         list=list->next; 
     }
 }
