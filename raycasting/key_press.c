@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/02 11:35:40 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/02 21:14:37 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 
 bool is_wall(t_map map,int x, int y)
 {
-    float new_x = (x) / FRAME_WIDTH;
-    float new_y = (y) / FRAME_HEIGHT  ;
+    float new_x = (float)x / FRAME_WIDTH;
+    float new_y = (float)y / FRAME_HEIGHT  ;
     if( x >= 0 && y >=0 && x < map.max_width*60 && y < map.map_height*60)
+    {
         if(map.map[(int)new_y ][(int)new_x] != '1')
             return false;
+    }
+        
     return true;
 }
 float normalize(float angle)
@@ -34,24 +37,18 @@ int update_player_position(t_map *map, float turn_angle)
     int  moves;
     float new_x;
     float new_y;
-    float tmp ;
+
     map->player_pos.rotation_angle += map->player_pos.turn_x * ROTATION_SPEED;
     map->player_pos.rotation_angle= normalize(map->player_pos.rotation_angle);
     moves = map->player_pos.turn_y * map->player_pos.move_speed;
     new_x = map->player_pos.x + cos(map->player_pos.rotation_angle + turn_angle) * moves;
     new_y = map->player_pos.y + sin(map->player_pos.rotation_angle + turn_angle) * moves;
-    tmp =new_y;
-    if(is_up(turn_angle)==1)
-       tmp = new_y - 2;
-    printf("%f\n",tmp);
-    if(is_wall(*map,new_x,tmp) == false)
+    if(is_wall(*map,new_x,new_y) == false)
     {
         map->player_pos.x = new_x;
         map->player_pos.y = new_y;
         return 1;
     }
-    else 
-        printf("is wall\n");
     return 0;
 }
 

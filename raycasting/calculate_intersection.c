@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_intersection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/02 11:49:00 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/02 18:24:02 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,13 +152,13 @@ void get_fov(t_map *map,float start_angle, float end_angle)
         if ((vertical_coord.distance >= horizontal_coord.distance))
         {
 
-            DDA(map,&pos,horizontal_coord.x *FACTOR,horizontal_coord.y*FACTOR);
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,horizontal_coord.x,horizontal_coord.y,horizontal_coord.distance)));
+            //DDA(map,&pos,horizontal_coord.x *FACTOR,horizontal_coord.y*FACTOR, );
+            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,1,horizontal_coord.distance)));
         }
         else
         {
-            DDA(map,&pos,vertical_coord.x*FACTOR ,vertical_coord.y*FACTOR); 
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,vertical_coord.x,vertical_coord.y,vertical_coord.distance)));
+            //DDA(map,&pos,vertical_coord.x*FACTOR ,vertical_coord.y*FACTOR); 
+            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,0,vertical_coord.distance)));
         }
        start_angle += ANGLE_FOV  / (map->max_width * 60);
  }

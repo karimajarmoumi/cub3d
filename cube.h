@@ -49,6 +49,8 @@
 #define FOV        (M_PI/3)
 #define ANGLE_FOV M_PI/3 
 #define  FACTOR    0.1
+#define NUM_RAYS ANGLE_FOV/(map->max_width * 60)
+
 typedef struct t_list
 {
 	void			*content;
@@ -61,7 +63,11 @@ typedef struct s_ray
     float y;
     int distance;
     float projection_wall;
+    float angle;
+    int hit_wall_v;
+    int hit_wall_h;
 }t_ray;
+
 typedef struct s_mlx_data
 {
     void    *mlx;
@@ -87,6 +93,7 @@ typedef struct s_coord
     float distance;
     int hit_wall;
 }t_coord;
+
 typedef struct s_position
 {
     float x;
@@ -153,7 +160,7 @@ int     is_identifier(char *key_value);
 void    affect_value(t_args **arg,char *key,char *value);
 void    check_identifier(char *line, t_map *map,int *count);
 void    check_color_rang(char **key_value, t_map *map);
-void    DDA(t_map *map,t_coord *pos , float target_x, float target_y);
+void    DDA(t_map *map,t_coord *pos , float target_x, float target_y, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    init_data_mlx(t_map *map);
 
@@ -172,6 +179,6 @@ int     is_up(float angle);
 int     is_right(float angle);
 void    get_fov(t_map *map, float start_angle, float end_angle);
 float   normalize(float angle);
-t_ray* ray_data (t_map map,float x, float y, float distance);
+t_ray* ray_data (t_map map,float angle, int flag, float distance);
 float calculate_distance(float x1, float y1, float x2, float y2);
 #endif
