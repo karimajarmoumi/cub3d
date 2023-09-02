@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:20:00 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/02 11:48:51 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/02 15:35:50 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
 int abs(int n) { return ((n > 0) ? n : (n * (-1))); }
-void DDA(t_map *map,t_coord *pos , float target_x, float target_y)
+void DDA(t_map *map,t_coord *pos , float target_x, float target_y,int color)
 {
     float dx;
     float dy;
@@ -34,7 +34,7 @@ void DDA(t_map *map,t_coord *pos , float target_x, float target_y)
     y = pos->y;
     while(i < steps && x >= 0 && y >= 0)
     {
-        my_mlx_pixel_put(map->data, x, y, 0x00ff00);
+        my_mlx_pixel_put(map->data, x, y,color);
         x += Xin ;
         y += Yin  ;
         i++;
