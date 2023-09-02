@@ -39,16 +39,16 @@
 #define RIGHT_ROTATE  65363
 #define LEFT_ROTATE  65361
 #define ESC  65307
-#define PI 3.14
 #define FRAME_WIDTH  60
 #define FRAME_HEIGHT 60
-#define NORD_ANGLE  270 * (PI/180)
-#define EAST_ANGLE 0 * (PI/180)
-#define SOUTH_ANGLE 90 * (PI/180)
-#define WEST_ANGLE 180 * (PI/180)
-#define FOV        60*(PI/180)
-#define ANGLE_FOV PI/3 
-
+#define NORD_ANGLE  (M_PI / 2) * 3
+#define EAST_ANGLE 0
+#define SOUTH_ANGLE M_PI/2
+#define ROTATION_SPEED M_PI/36 
+#define WEST_ANGLE M_PI
+#define FOV        (M_PI/3)
+#define ANGLE_FOV M_PI/3 
+#define  FACTOR    0.1
 typedef struct t_list
 {
 	void			*content;
@@ -82,8 +82,10 @@ typedef struct  s_player
 }t_player;
 typedef struct s_coord
 {
-    int x;
-    int y;
+    float x;
+    float y;
+    float distance;
+    int hit_wall;
 }t_coord;
 typedef struct s_position
 {
@@ -93,7 +95,6 @@ typedef struct s_position
     int turn_x;
     int turn_y;
     float rotation_angle;
-    float rotation_speed;
     int move_speed;
     int half_fov;
 }t_position;
@@ -152,15 +153,25 @@ int     is_identifier(char *key_value);
 void    affect_value(t_args **arg,char *key,char *value);
 void    check_identifier(char *line, t_map *map,int *count);
 void    check_color_rang(char **key_value, t_map *map);
-void DDA(t_map *map,t_coord *pos , int target_x, int target_y);
+void    DDA(t_map *map,t_coord *pos , float target_x, float target_y);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    init_data_mlx(t_map *map);
-void    draw_map(t_map *map, t_data *data);
+
 int	    close_win(t_map *data);
 int	    key_pressed(int code,t_map *map);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
-int	ft_lstsize(t_list *lst);
-int abs(int n);
+int	    ft_lstsize(t_list *lst);
+int     abs(int n);
+void    draw_3d_view(t_map map);
+void    draw_3d_map(t_map *map);
+void draw_2D_map(t_map *map, t_data *data);
+bool    is_wall(t_map map,int x, int y);
+int     is_up(float angle);
+int     is_right(float angle);
+void    get_fov(t_map *map, float start_angle, float end_angle);
+float   normalize(float angle);
+t_ray* ray_data (t_map map,float x, float y, float distance);
+float calculate_distance(float x1, float y1, float x2, float y2);
 #endif
