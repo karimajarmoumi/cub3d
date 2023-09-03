@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:49:52 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/03 11:28:12 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:51:32 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_ray* ray_data (t_map map,float angle, int flag, t_coord inter_type)
     ray = malloc(sizeof(t_ray));
     ray->x = inter_type.x;
     ray->y = inter_type.y;
-    ray->distance = inter_type.distance;
+    ray->distance = (int)(inter_type.distance* cos(angle - map.player_pos.rotation_angle));
     ray->angle = angle;
     ray->projection_wall = (FRAME_HEIGHT * ((map.max_width*FRAME_WIDTH /2) / tan(FOV / 2)))/ray->distance;
     if(flag == 1)

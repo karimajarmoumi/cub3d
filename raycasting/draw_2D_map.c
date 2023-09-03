@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/03 11:07:07 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:46:34 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,4 @@ void draw_2D_map(t_map *map, t_data *data)
         }
         i++;
     }
-    get_fov(map,map->player_pos.rotation_angle - M_PI / 6  ,map->player_pos.rotation_angle + M_PI / 6);
 }
