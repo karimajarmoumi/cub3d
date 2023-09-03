@@ -179,6 +179,6 @@ int     is_up(float angle);
 int     is_right(float angle);
 void    get_fov(t_map *map, float start_angle, float end_angle);
 float   normalize(float angle);
-t_ray* ray_data (t_map map,float angle, int flag, float distance);
+t_ray* ray_data (t_map map,float angle, int flag, t_coord inter_type);
 float calculate_distance(float x1, float y1, float x2, float y2);
 #endif

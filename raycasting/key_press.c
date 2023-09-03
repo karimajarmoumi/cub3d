@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/02 21:14:37 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/03 19:56:20 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,7 @@ int	key_pressed(int code,t_map *map)
        print_error("you exit the program");
     if(update_player_position(map, turn_angle)==1)
     {
-        //mlx_clear_window (map->data->mlx, map->data->win);
-        mlx_destroy_image(map->data->mlx,map->data->img);
+        // mlx_destroy_image(map->data->mlx,map->data->img);
         map->data->img = mlx_new_image(map->data->mlx, map->max_width * 60, map->map_height * 60);
         if (!map->data->img)
             print_error("error to create image");   

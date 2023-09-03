@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/02 18:24:02 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/03 19:54:37 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,30 +136,28 @@ t_coord horizontal_intersection(t_map map, float angle)
 }
 
 void get_fov(t_map *map,float start_angle, float end_angle)
- {
- 
-    t_coord horizontal_coord;
+{
     t_coord pos;
+    t_coord horizontal_coord;
+    
     map->rays = NULL;
     pos.x = map->player_pos.x *FACTOR;
     pos.y = map->player_pos.y*FACTOR;
     t_coord vertical_coord;
-   while(start_angle <= end_angle)
-   {
-        horizontal_coord = horizontal_intersection(*map,normalize(start_angle));
-    
-        vertical_coord = vertical_intersection(*map,normalize(start_angle));
+    while(start_angle <= end_angle)
+    {
+        horizontal_coord = horizontal_intersection(*map, normalize(start_angle));
+        vertical_coord = vertical_intersection(*map, normalize(start_angle));
         if ((vertical_coord.distance >= horizontal_coord.distance))
         {
-
             //DDA(map,&pos,horizontal_coord.x *FACTOR,horizontal_coord.y*FACTOR, );
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,1,horizontal_coord.distance)));
+            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,1,horizontal_coord)));
         }
         else
         {
-            //DDA(map,&pos,vertical_coord.x*FACTOR ,vertical_coord.y*FACTOR); 
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,0,vertical_coord.distance)));
+           // DDA(map,&pos,vertical_coord.x*FACTOR ,vertical_coord.y*FACTOR); 
+            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,0,vertical_coord)));
         }
        start_angle += ANGLE_FOV  / (map->max_width * 60);
- }
- }
+    }
+}
