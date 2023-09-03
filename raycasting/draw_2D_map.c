@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2D_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/02 11:49:19 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/03 11:07:07 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void display_frame(t_data *data, t_map *map, int i, int j)
     int sep_color;
     int pos_x;
     int pos_y;
-    
 
     wall_color = 0xA0A0A0;
     player_color = 0x0000FF;
@@ -76,8 +75,6 @@ void display_frame(t_data *data, t_map *map, int i, int j)
         y++;
     }
 }
-
-
 
 void draw_2D_map(t_map *map, t_data *data)
 {
