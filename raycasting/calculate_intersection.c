@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/03 19:54:37 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:44:35 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ t_coord horizontal_intersection(t_map map, float angle)
     return coord;
 }
 
-void get_fov(t_map *map,float start_angle, float end_angle)
+void get_fov(t_map *map,float start_angle, float end_angle, int flag)
 {
     t_coord pos;
     t_coord horizontal_coord;
@@ -150,13 +150,17 @@ void get_fov(t_map *map,float start_angle, float end_angle)
         vertical_coord = vertical_intersection(*map, normalize(start_angle));
         if ((vertical_coord.distance >= horizontal_coord.distance))
         {
-            //DDA(map,&pos,horizontal_coord.x *FACTOR,horizontal_coord.y*FACTOR, );
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,1,horizontal_coord)));
+            if(flag ==1)
+                DDA(map,&pos,horizontal_coord.x *FACTOR,horizontal_coord.y*FACTOR, 0x00ff00);
+            else
+                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,1,horizontal_coord)));
         }
         else
         {
-           // DDA(map,&pos,vertical_coord.x*FACTOR ,vertical_coord.y*FACTOR); 
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,0,vertical_coord)));
+            if(flag ==1)
+                DDA(map,&pos,vertical_coord.x*FACTOR ,vertical_coord.y*FACTOR,0x00ff00);
+            else
+                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,0,vertical_coord)));
         }
        start_angle += ANGLE_FOV  / (map->max_width * 60);
     }

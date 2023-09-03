@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:29 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/03 21:45:22 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/03 22:46:17 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void calculateWall_Top_Bottom_pixel(t_map *map, int wall_slice_height, int *top,
     *bottom = *top + wall_slice_height ;
     if (*bottom > map->map_height *60 || *bottom < 0)
         *bottom = map->map_height * 60;
-    printf("top %d %d  \n",*top, *bottom );
 }
 
 void    set_color_of_ceiling(t_map *map, int ray_x, int top_pixel)
@@ -59,7 +58,7 @@ void    set_textures(t_map *map, t_ray *ray, int i)
     while (y < bottom_pixel)
     {
         //offsetY = (y - top_pixel) * ((float)FRAME_HEIGHT / ray->projection_wall);
-        my_mlx_pixel_put(map->data, i,  y, (i % 2)? 0xffeebb : 0xffeeaa);   
+        my_mlx_pixel_put(map->data, i,  y, ((i % 50) && ( y  % 50))? 0x000000 : 0xffffff);   
         y++;
     }
     set_color_of_floor(map, i, bottom_pixel);
@@ -94,7 +93,9 @@ void draw_3d_view(t_map map)
 
 void draw_3d_map(t_map *map)
 {
-    draw_2D_map(map, map->data);
+    get_fov(map,map->player_pos.rotation_angle - M_PI / 6  ,map->player_pos.rotation_angle + M_PI / 6,0);
     draw_3d_view(*map);
+    draw_2D_map(map, map->data);
+    get_fov(map,map->player_pos.rotation_angle - M_PI / 6  ,map->player_pos.rotation_angle + M_PI / 6,1);
     mlx_put_image_to_window(map->data->mlx, map->data->win, map->data->img, 0, 0);
 }

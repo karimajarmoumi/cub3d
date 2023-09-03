@@ -177,8 +177,9 @@ void draw_2D_map(t_map *map, t_data *data);
 bool    is_wall(t_map map,int x, int y);
 int     is_up(float angle);
 int     is_right(float angle);
-void    get_fov(t_map *map, float start_angle, float end_angle);
+void    get_fov(t_map *map, float start_angle, float end_angle,int flag);
 float   normalize(float angle);
 t_ray* ray_data (t_map map,float angle, int flag, t_coord inter_type);
 float calculate_distance(float x1, float y1, float x2, float y2);
+int update_player_position(t_map *map, float turn_angle);
 #endif
