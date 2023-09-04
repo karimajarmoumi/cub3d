@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:29 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/04 20:33:57 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/04 22:22:31 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,17 +72,20 @@ void set_wall_texture(t_map *map, t_ray *ray, int i, int top_pixel, int bottom_p
     int             offsetX;
     int             offsetY;
     unsigned int    color;
-    // int             distance_from_top;
+    int             distance_from_top;
     
-    if (ray->hit_wall_v)
+    if (ray->hit_wall_v ==1)
         offsetX = (int)ray->y % 60;
-    else
+    if (ray->hit_wall_h==1)
+    {
         offsetX = (int)ray->x % 60;
+    }
+        
     y = top_pixel;
     while (y < bottom_pixel)
     {
-       // distance_from_top = y + (ray->projection_wall / 2) - (map->map_height / 2);
-        offsetY = (y - top_pixel) * ((float)FRAME_HEIGHT / ray->projection_wall);
+        distance_from_top = y + (ray->projection_wall / 2) - ((map->map_height *60)/ 2);
+        offsetY = distance_from_top * ((float)FRAME_HEIGHT / ray->projection_wall);
         color = get_pixel_color(map->textures, offsetY,offsetX);
         my_mlx_pixel_put(map->data, i,  y, color);   
         y++;
