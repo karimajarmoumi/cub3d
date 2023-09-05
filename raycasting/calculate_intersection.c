@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calculate_intersection.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/03 22:44:35 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:14:14 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,6 @@ void get_fov(t_map *map,float start_angle, float end_angle, int flag)
             else
                 ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,0,vertical_coord)));
         }
-       start_angle += ANGLE_FOV  / (map->max_width * 60);
+       start_angle += ANGLE_FOV  /(float)(map->max_width * 60);
     }
 }

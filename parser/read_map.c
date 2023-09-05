@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/04 16:53:22 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:14:09 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void init_map(t_player *player, t_map *map)
     map->ceiling_color = 0;
     map->data= malloc(sizeof(t_data));
     map->args = malloc(sizeof(t_args*)*7);
+    map->textures = malloc(sizeof(t_data));
     // map->rays = malloc(sizeof(t_list));
     affect_value(&(map->args[0]),"NO",NULL);
     affect_value(&(map->args[1]),"SO",NULL);

@@ -52,6 +52,7 @@
 #define   MAP_WIDTH 1800
 #define   MAP_HEIGHT 700
 #define NUM_RAYS ANGLE_FOV/(map->max_width * 60)
+#define WALL_PATH "./textures/1.xpm"
 
 typedef struct t_list
 {
@@ -79,6 +80,8 @@ typedef struct s_mlx_data
     int     bits_per_pixel;
     int     line_length;
     int     endian;
+    int width;
+    int height;
 }t_data;
 
 typedef struct  s_player
@@ -88,6 +91,7 @@ typedef struct  s_player
     char    **map_cpy;
     int      map_begin;
 }t_player;
+
 typedef struct s_coord
 {
     float x;
@@ -115,6 +119,14 @@ typedef struct s_args
     int     flag;
 }t_args;
 
+// typedef struct s_textures
+// {
+//     void    *img;
+//     char    *addr;
+//     int     bits_per_pixel;
+//     int     line_length;
+//     int     endian;
+// }t_textures;
 
 typedef struct  s_map
 {
@@ -128,9 +140,10 @@ typedef struct  s_map
     t_position  player_pos;
 	t_data     *data;
     t_list     *rays;
-
+    t_data      *textures;
 } t_map;
 
+void init_textures(t_map *map);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
 int     t_strlen(const char *str);
@@ -172,7 +185,7 @@ t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
 int	    ft_lstsize(t_list *lst);
 int     abs(int n);
-void    draw_3d_view(t_map map);
+void    draw_3d_view(t_map *map);
 void    draw_3d_map(t_map *map);
 void    draw_2D_map(t_map *map, t_data *data);
 bool    is_wall(t_map map,int x, int y);
@@ -186,4 +199,5 @@ int     update_player_position(t_map *map, float turn_angle);
 void    free_rays(t_list **rays);
 void	free_double_ptr(char **ptr);
 void	free_struct_args(t_args **ptr);
+
 #endif

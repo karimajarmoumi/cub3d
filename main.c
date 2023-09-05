@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/04 20:25:07 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:13:37 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ int mouse_hook(int x, int y, void *map)
     else
         tmp_map->player_pos.turn_x = -1;
     update_player_position(tmp_map, turn_angle);
-
-        draw_3d_map(tmp_map);
-    return 1;
+    draw_3d_map(tmp_map);
+    return (1);
 }
 
 int main(int ac, char **av)
@@ -38,9 +37,11 @@ int main(int ac, char **av)
         {
             readMap(av[1],&map);
             init_data_mlx(&map);
+            init_textures(&map);
+           // printf("llll%p\n",map.textures->addr);
             draw_3d_map(&map);
             mlx_hook(map.data->win, 2, 1L<<0, key_pressed, &map);
-           // mlx_hook(map.data->win, 6, 1L<<6, mouse_hook, &map);
+            // mlx_hook(map.data->win, 6, 1L<<6, mouse_hook, &map);
             mlx_hook(map.data->win, 17, 0, close_win, &map);
             mlx_loop(map.data->mlx);
         }
