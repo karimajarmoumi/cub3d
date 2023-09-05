@@ -52,10 +52,10 @@
 #define   MAP_WIDTH 1800
 #define   MAP_HEIGHT 700
 #define NUM_RAYS ANGLE_FOV/(map->max_width * 60)
-#define WALL_PATH "./textures/1.xpm"
 #define WINDOW_HEIGHT  780
 #define WINDOW_WIDTH  1080
 #define  MAP_CENTER WINDOW_HEIGHT/2
+
 typedef struct t_list
 {
 	void			*content;
@@ -82,8 +82,8 @@ typedef struct s_mlx_data
     int     bits_per_pixel;
     int     line_length;
     int     endian;
-    int width;
-    int height;
+    int     width;
+    int     height;
 }t_data;
 
 typedef struct  s_player
@@ -120,15 +120,6 @@ typedef struct s_args
     char    *value;
     int     flag;
 }t_args;
-
-// typedef struct s_textures
-// {
-//     void    *img;
-//     char    *addr;
-//     int     bits_per_pixel;
-//     int     line_length;
-//     int     endian;
-// }t_textures;
 
 typedef struct  s_map
 {

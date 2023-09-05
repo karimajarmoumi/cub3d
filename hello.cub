@@ -1,11 +1,10 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA vvvv
+NO ./textures/NO.xpm
+SO ./textures/SO.xpm
+EA ./textures/EA.xpm
+WE ./textures/WE.xpm
+
 F 3,132,131
 C 212,222,255
-
-
 
 1111111111111111111111111
 1000000000000001000000001

@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/05 19:37:54 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:24:56 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 float calculate_distance(float x1, float y1, float x2, float y2)
 {
-    float distance;
+    float   distance;
 
     distance = sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
     return distance;
@@ -153,14 +153,14 @@ void get_fov(t_map *map,float start_angle, float end_angle, int flag)
             if(flag ==1)
                 DDA(map,&pos,horizontal_coord.x *FACTOR,horizontal_coord.y*FACTOR, 0x00ff00);
             else
-                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,1,horizontal_coord)));
+                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,normalize(start_angle),1,horizontal_coord)));
         }
         else
         {
             if(flag ==1)
                 DDA(map,&pos,vertical_coord.x*FACTOR ,vertical_coord.y*FACTOR,0x00ff00);
             else
-                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,start_angle,0,vertical_coord)));
+                ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,normalize(start_angle),0,vertical_coord)));
         }
        start_angle += ANGLE_FOV  /(float)WINDOW_WIDTH;
     }

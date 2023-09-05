@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/05 19:21:50 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:26:31 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int main(int ac, char **av)
             readMap(av[1],&map);
             init_data_mlx(&map);
             init_textures(&map);
-           // printf("llll%p\n",map.textures->addr);
             draw_3d_map(&map);
             mlx_hook(map.data->win, 2, 1L<<0, key_pressed, &map);
             mlx_mouse_hook(map.data->win, mouse_hook, &map);
