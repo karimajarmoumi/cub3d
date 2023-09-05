@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:04 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/14 20:20:29 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:40:59 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,50 @@ int  count_words(char **str)
     while(str && str[i])
         i++; 
     return i;   
+}
+
+void	free_double_ptr(char **ptr)
+{
+	int	i;
+
+	i = 0;
+	if (ptr)
+	{
+		if (*ptr)
+		{
+			while (ptr[i])
+			{
+				free(ptr[i]);
+				ptr[i] = NULL;
+				i++;
+			}
+			free(ptr);
+		}
+	}
+}
+
+
+
+void	free_struct_args(t_args **ptr)
+{
+	int	i;
+
+	i = 0;
+	if (ptr)
+	{
+		if (*ptr)
+		{
+			while (ptr[i])
+			{
+                //printf("%d %s hhhere\n",i,ptr[i]->key);
+              //  printf("%s\n",ptr[i]->value);
+				//free(ptr[i]->key);
+				//free(ptr[i]->value);
+                //free(ptr[i]);
+				//ptr[i] = NULL;
+				i++;
+			}
+			//free(ptr);
+		}
+	}
 }

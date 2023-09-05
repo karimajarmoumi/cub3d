@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:20:00 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/02 15:35:50 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:32:43 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
-int abs(int n) { return ((n > 0) ? n : (n * (-1))); }
 void DDA(t_map *map,t_coord *pos , float target_x, float target_y,int color)
 {
     float dx;

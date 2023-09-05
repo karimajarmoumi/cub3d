@@ -49,6 +49,8 @@
 #define FOV        (M_PI/3)
 #define ANGLE_FOV M_PI/3 
 #define  FACTOR    0.1
+#define   MAP_WIDTH 1800
+#define   MAP_HEIGHT 700
 #define NUM_RAYS ANGLE_FOV/(map->max_width * 60)
 
 typedef struct t_list
@@ -163,7 +165,6 @@ void    check_color_rang(char **key_value, t_map *map);
 void    DDA(t_map *map,t_coord *pos , float target_x, float target_y, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    init_data_mlx(t_map *map);
-
 int	    close_win(t_map *data);
 int	    key_pressed(int code,t_map *map);
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -173,13 +174,16 @@ int	    ft_lstsize(t_list *lst);
 int     abs(int n);
 void    draw_3d_view(t_map map);
 void    draw_3d_map(t_map *map);
-void draw_2D_map(t_map *map, t_data *data);
+void    draw_2D_map(t_map *map, t_data *data);
 bool    is_wall(t_map map,int x, int y);
 int     is_up(float angle);
 int     is_right(float angle);
 void    get_fov(t_map *map, float start_angle, float end_angle,int flag);
 float   normalize(float angle);
-t_ray* ray_data (t_map map,float angle, int flag, t_coord inter_type);
-float calculate_distance(float x1, float y1, float x2, float y2);
-int update_player_position(t_map *map, float turn_angle);
+t_ray*  ray_data (t_map map,float angle, int flag, t_coord inter_type);
+float   calculate_distance(float x1, float y1, float x2, float y2);
+int     update_player_position(t_map *map, float turn_angle);
+void    free_rays(t_list **rays);
+void	free_double_ptr(char **ptr);
+void	free_struct_args(t_args **ptr);
 #endif

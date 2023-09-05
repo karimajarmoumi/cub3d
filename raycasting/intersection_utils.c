@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:49:52 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/03 22:51:32 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/04 14:26:59 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_ray* ray_data (t_map map,float angle, int flag, t_coord inter_type)
     ray = malloc(sizeof(t_ray));
     ray->x = inter_type.x;
     ray->y = inter_type.y;
-    ray->distance = (int)(inter_type.distance* cos(angle - map.player_pos.rotation_angle));
+    ray->distance = floor(inter_type.distance) * cos(angle - map.player_pos.rotation_angle);
     ray->angle = angle;
     ray->projection_wall = (FRAME_HEIGHT * ((map.max_width*FRAME_WIDTH /2) / tan(FOV / 2)))/ray->distance;
     if(flag == 1)
@@ -43,4 +43,29 @@ t_ray* ray_data (t_map map,float angle, int flag, t_coord inter_type)
     return ray;
 }
 
+
+void free_rays(t_list **list)
+{
+    t_list *tmp_list =NULL;
+    t_ray *tmp_ray;
+    t_list *next;
+    tmp_list = *list;
+    
+    while(tmp_list)
+    {
+        tmp_ray=(t_ray*)((tmp_list)->content);
+        if(tmp_ray)
+        {
+            free(tmp_ray);
+            tmp_ray =NULL;
+        }
+        next = (tmp_list)->next;
+        if(tmp_list)
+        {
+            free(tmp_list);
+            tmp_list =NULL;
+        }
+        tmp_list = next;
+    }
+}
 

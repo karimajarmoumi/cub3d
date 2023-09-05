@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/03 19:56:20 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/04 17:54:13 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ int update_player_position(t_map *map, float turn_angle)
 int	key_pressed(int code,t_map *map)
 {
     float turn_angle;
-     
     map->player_pos.turn_x = 0;
     map->player_pos.turn_y = 0;
     turn_angle = 0;
@@ -78,15 +77,15 @@ int	key_pressed(int code,t_map *map)
     if(code == RIGHT_ROTATE)
         map->player_pos.turn_x = 1;
     if(code == ESC)
-       print_error("you exit the program");
-    if(update_player_position(map, turn_angle)==1)
     {
-        // mlx_destroy_image(map->data->mlx,map->data->img);
-        map->data->img = mlx_new_image(map->data->mlx, map->max_width * 60, map->map_height * 60);
-        if (!map->data->img)
-            print_error("error to create image");   
-        map->data->addr = mlx_get_data_addr(map->data->img, &map->data->bits_per_pixel, 
-        &map->data->line_length, &map->data->endian);
+        //free_double_ptr(map->map);
+       // free_double_ptr(map->);
+       //destroy image and and free
+       print_error("you exit the program");
+    }
+    if(update_player_position(map, turn_angle) == 1)
+    {
+        free_rays(&(map->rays));
         draw_3d_map(map);
     }
 	return (code);

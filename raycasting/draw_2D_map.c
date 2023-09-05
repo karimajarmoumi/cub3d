@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2D_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/03 22:46:34 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/04 22:11:43 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void display_frame(t_data *data, t_map *map, int i, int j)
     player_color = 0x0000FF;
     floor_color = 0xFFFFFF;
     sep_color = 0x000000;
-    y = 0; 
+    y = 0;
+    
     while (y < FRAME_HEIGHT)
     {
         x = 0;
@@ -68,7 +69,7 @@ void display_frame(t_data *data, t_map *map, int i, int j)
             { 
                 my_mlx_pixel_put(data,pos_x ,pos_y , floor_color);
             }
-            if(y == 59 || x== 59)
+            if(y == 59 || x == 59)
                 my_mlx_pixel_put(data, pos_x, pos_y, sep_color);
             x++;
         }

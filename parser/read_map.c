@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/30 12:20:43 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:53:22 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ void readMap(char *fileName, t_map *map)
     if(!map->map_height)
         print_error("there is no map");
     fillArray(map, &player,fileName);
-    //displayArray(map->map);
-   //flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
-    //displayArray(player.map_cpy);
+   // flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
+     free_struct_args(map->args);
+    free_double_ptr(player.map_cpy);
 }
-
-

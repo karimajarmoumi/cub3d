@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3D_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:29 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/03 22:46:17 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:10:47 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,14 @@ void draw_3d_view(t_map map)
     t_coord pos_start;
     t_coord pos_end;
     t_ray   *ray;
+    t_list *tmp_rays = map.rays;
+    
     
     i = 0;
     map_center = map.map_height * 60 / 2;
-    while(map.rays &&  i < map.max_width*60)
+    while(tmp_rays &&  i < map.max_width*60)
     {
-        ray = (t_ray*)map.rays->content;
+        ray = (t_ray*)tmp_rays->content;
         pos_start.x = i;
         pos_start.y = map_center - (ray->projection_wall / 2);
         pos_end.x = pos_start.x;
@@ -86,9 +88,10 @@ void draw_3d_view(t_map map)
         //draw_window(map)
        // DDA(&map,&pos_start,pos_start.x,pos_start.y + ray->projection_wall, 0xFFFFFF);
         //draw_wall_texture(map, pos_start, pos_end, wall_texture());
-        map.rays = map.rays->next;
+        tmp_rays = tmp_rays->next;
         i++;
     }
+   
 }
 
 void draw_3d_map(t_map *map)
@@ -96,6 +99,7 @@ void draw_3d_map(t_map *map)
     get_fov(map,map->player_pos.rotation_angle - M_PI / 6  ,map->player_pos.rotation_angle + M_PI / 6,0);
     draw_3d_view(*map);
     draw_2D_map(map, map->data);
-    get_fov(map,map->player_pos.rotation_angle - M_PI / 6  ,map->player_pos.rotation_angle + M_PI / 6,1);
+  //  get_fov(map,map->player_pos.rotation_angle - M_PI / 6  ,map->player_pos.rotation_angle + M_PI / 6,1);
     mlx_put_image_to_window(map->data->mlx, map->data->win, map->data->img, 0, 0);
+    
 }

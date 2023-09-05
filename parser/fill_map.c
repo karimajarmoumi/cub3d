@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:05 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/23 11:59:10 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/04 15:14:31 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void line_of_spaces(t_player *player, int *i, char *line)
     ft_memset(player->map_cpy[*i], ' ', len+2);
     player->map_cpy[*i][len + 2] = '\0';
     (*i)++;
+    //FREE
 }
 
 void add_spaces_to_line(t_player *player, int *i, char *line)
@@ -33,6 +34,7 @@ void add_spaces_to_line(t_player *player, int *i, char *line)
     str = ft_strjoin(str," ");
     ft_free(tmp);
     player->map_cpy[*i] = str;
+    //i free here if there is a seg 
     (*i)++;
 }
 

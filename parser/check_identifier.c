@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/17 11:32:02 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:52:08 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void check_color_rang(char **key_value, t_map *map)
     len = ft_strlen(key_value[1]);
     i = 0;
     
-    if(!ft_strcmp(key_value[0], "F")|| !ft_strcmp(key_value[0], "C"))
+    if(!ft_strcmp(key_value[0], "F") || !ft_strcmp(key_value[0], "C"))
        {
             range = ft_split(key_value[1], ',');
             if(!ft_isdigit(key_value[1][len -1]) || count_words(range) != 3)
@@ -97,6 +97,7 @@ void check_color_rang(char **key_value, t_map *map)
                 store_color_value(&(map->floor_color), range[0],range[1],range[2]);
             else if(!ft_strcmp(key_value[0], "C"))
                 store_color_value(&(map->ceiling_color), range[0],range[1],range[2]);
+        free_double_ptr(range);
        }
 }
 
@@ -122,7 +123,6 @@ void  check_identifier(char *line, t_map *map, int *count)
                 map->args[i]->flag++;
                 affect_value(&(map->args[0]), NULL, key_value[1]);
                 check_color_rang(key_value,map);
-                
             }
             if(map->args[i]->flag==1)
                 (*count)++;
@@ -131,4 +131,7 @@ void  check_identifier(char *line, t_map *map, int *count)
             i++;
         }
     }
+//free_struct_args(map->args);
+    
+   free_double_ptr(key_value);
 }
