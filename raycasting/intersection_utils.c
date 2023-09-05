@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   intersection_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:49:52 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/04 22:47:51 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/05 11:14:58 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,29 @@ t_ray* ray_data (t_map map,float angle, int flag, t_coord inter_type)
     return ray;
 }
 
+
+void free_rays(t_list **list)
+{
+    t_list *tmp_list =NULL;
+    t_ray *tmp_ray;
+    t_list *next;
+    tmp_list = *list;
+    
+    while(tmp_list)
+    {
+        tmp_ray=(t_ray*)((tmp_list)->content);
+        if(tmp_ray)
+        {
+            free(tmp_ray);
+            tmp_ray =NULL;
+        }
+        next = (tmp_list)->next;
+        if(tmp_list)
+        {
+            free(tmp_list);
+            tmp_list =NULL;
+        }
+        tmp_list = next;
+    }
+}
 

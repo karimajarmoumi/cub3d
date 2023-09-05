@@ -49,6 +49,8 @@
 #define FOV        (M_PI/3)
 #define ANGLE_FOV M_PI/3 
 #define  FACTOR    0.1
+#define   MAP_WIDTH 1800
+#define   MAP_HEIGHT 700
 #define NUM_RAYS ANGLE_FOV/(map->max_width * 60)
 #define WALL_PATH "./textures/1.xpm"
 
@@ -194,5 +196,8 @@ float   normalize(float angle);
 t_ray*  ray_data (t_map map,float angle, int flag, t_coord inter_type);
 float   calculate_distance(float x1, float y1, float x2, float y2);
 int     update_player_position(t_map *map, float turn_angle);
+void    free_rays(t_list **rays);
+void	free_double_ptr(char **ptr);
+void	free_struct_args(t_args **ptr);
 
 #endif
