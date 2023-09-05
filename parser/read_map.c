@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/05 11:14:09 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/05 17:56:40 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_player* init_player(t_player *player)
     player->flag_on = 0;
     player->count_player = 0;
     player->map_begin = 0;
-    return player;
+    return (player);
 }
 
 t_position init_p(t_position *player)
@@ -27,7 +27,7 @@ t_position init_p(t_position *player)
     player->turn_x = 0;
     player->turn_y = 0;
     player->move_speed = 5;
-    return *player;
+    return (*player);
 }
 
 void init_map(t_player *player, t_map *map)
@@ -38,15 +38,14 @@ void init_map(t_player *player, t_map *map)
     map->ceiling_color = 0;
     map->data= malloc(sizeof(t_data));
     map->args = malloc(sizeof(t_args*)*7);
-    map->textures = malloc(sizeof(t_data));
-    // map->rays = malloc(sizeof(t_list));
+    map->textures = malloc(sizeof(t_data) * 4);
     affect_value(&(map->args[0]),"NO",NULL);
     affect_value(&(map->args[1]),"SO",NULL);
     affect_value(&(map->args[2]),"WE",NULL);
     affect_value(&(map->args[3]),"EA",NULL);
     affect_value(&(map->args[4]),"F",NULL);
     affect_value(&(map->args[5]),"C",NULL);
-    map->args[6]=NULL;   
+    map->args[6] = NULL;   
     map->map_height = 0;
     map-> max_width = 0;
     map-> total_height = 0;
@@ -99,6 +98,6 @@ void readMap(char *fileName, t_map *map)
         print_error("there is no map");
     fillArray(map, &player,fileName);
    // flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
-     free_struct_args(map->args);
+    free_struct_args(map->args);
     free_double_ptr(player.map_cpy);
 }
