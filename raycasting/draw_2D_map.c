@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_2D_map.c                                      :+:      :+:    :+:   */
+/*   draw_mini_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -39,77 +39,33 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-void display_frame(t_data *data, t_map *map, int i, int j)
-{
-    int y;
-    int x;
-    int wall_color;
-    int player_color;
-    int floor_color;
-    int sep_color;
-    int pos_x;
-    int pos_y;
 
-    wall_color = 0xA0A0A0;
-    player_color = 0x0000FF;
-    floor_color = 0xFFFFFF;
-    sep_color = 0x000000;
-    y = 0;
-    
-    while (y < FRAME_HEIGHT)
-    {
-        x = 0;
-        while (x < FRAME_WIDTH)
-        {
-            pos_x = (x + (FRAME_WIDTH  *j))*FACTOR;
-            pos_y = (y + (i * FRAME_HEIGHT))*FACTOR;
-            if (map->map[i][j] == WALL)
-                my_mlx_pixel_put(data, pos_x,pos_y , wall_color);
-            else if (map->map[i][j] == EMPTY || map->map[i][j] == map->player_pos.player_symbol)
-            { 
-                my_mlx_pixel_put(data,pos_x ,pos_y , floor_color);
-            }
-            if(y == 59 || x == 59)
-                my_mlx_pixel_put(data, pos_x, pos_y, sep_color);
-            x++;
-        }
-        y++;
-    }
-}
-
-void draw_2D_map(t_map *map, t_data *data)
+void draw_mini_map(t_map *map, t_data *data)
 {
     int i;
     int j;
-    (void)*data;
-    (void)*map;
-    j = 0;
-    i = 0;
     int tmp_x ;
     int tmp_y;
-    int player_color = 0x0000FF;
-   int floor_color = 0xFFFFFF;
- //int sep_color = 0x000000;
-  int  wall_color = 0xA0A0A0;
-    while (i < 200)
+
+    i = 0;
+    while (i <=MINIMAP_HEIGHT)
     {  
         j = 0;   
-        
-        while (j < 200)
+        while (j <=  MINIMAP_WIDTH)
         { 
-             tmp_x = ((map->player_pos.x - 100 ) + j) /60;
-             tmp_y = ((map->player_pos.y  - 100) + i) /60;
-            if(i == 100 && j == 100)
-               my_mlx_pixel_put(data, j, i, player_color);
-            else if(map->map[tmp_y][tmp_x]==WALL)
-            my_mlx_pixel_put(data, j,i, wall_color);
-           else if(map->map[tmp_y][tmp_x ] == EMPTY)
-           {
-            
-                my_mlx_pixel_put(data, j,i, floor_color);
-           }
-           else
-                my_mlx_pixel_put(data, j, i,  floor_color);
+             tmp_x = ((map->player_pos.x - MINIMAP_WIDTH/2 ) + j) / FRAME_WIDTH;
+             tmp_y = ((map->player_pos.y  - MINIMAP_HEIGHT /2) + i) /FRAME_HEIGHT;
+             if(tmp_x>=0 && tmp_y >=0 && tmp_x < map->max_width && tmp_y < map->map_height)
+             {
+                if(map->map[tmp_y][tmp_x ] == EMPTY || map->map[tmp_y][tmp_x] == map->player_pos.player_symbol)
+                    my_mlx_pixel_put(data, j,i, FLOOR_COLOR);
+                else if(map->map[tmp_y][tmp_x] == WALL)
+                     my_mlx_pixel_put(data, j,i,WALL_COLOR);
+                if((i == 100 && j == 100) || (i == 100 && j == 101))
+                    my_mlx_pixel_put(data, j, i,PLAYER_COLOR);
+             }
+             else
+                    my_mlx_pixel_put(data, j, i,  SPACE_COLOR);
             j++;
         }
         i++;

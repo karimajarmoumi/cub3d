@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:29 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/05 20:25:35 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:47:23 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,22 +149,23 @@ void    set_textures(t_map *map, t_ray *ray, int i)
 void draw_3d_view(t_map *map)
 {
     int     i;
-    //int     map_center;
     t_coord pos_start;
     t_coord pos_end;
     t_ray   *ray;
+    t_list *tmp_list;
+
+    tmp_list = map->rays;
     
     i = 0;
-   // map_center = map->map_height * 60 / 2;
-    while(map->rays &&  i < WINDOW_WIDTH)
+    while(tmp_list &&  i < WINDOW_WIDTH)
     {
-        ray = (t_ray*)map->rays->content;
+        ray = (t_ray*)tmp_list->content;
         pos_start.x = i;
         pos_start.y = MAP_CENTER - (ray->projection_wall / 2);
         pos_end.x = pos_start.x;
         pos_end.y = pos_start.y + ray->projection_wall;
         set_textures(map, ray, i);
-        map->rays = map->rays->next;
+        tmp_list = tmp_list->next;
         i++;
     }
 }
@@ -172,10 +173,9 @@ void draw_3d_view(t_map *map)
 void draw_3d_map(t_map *map)
 {
     get_fov(map,map->player_pos.rotation_angle - M_PI / 6 
-        ,map->player_pos.rotation_angle + M_PI / 6, 0);
+        ,map->player_pos.rotation_angle + M_PI / 6);
     draw_3d_view(map);
-    draw_2D_map(map, map->data);
-   // get_fov(map,map->player_pos.rotation_angle - M_PI / 6
-   // , map->player_pos.rotation_angle + M_PI / 6, 1);
+    free_rays(&(map->rays));
+    draw_mini_map(map, map->data);
     mlx_put_image_to_window(map->data->mlx, map->data->win, map->data->img, 0, 0);
 }

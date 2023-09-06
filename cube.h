@@ -55,7 +55,14 @@
 #define WINDOW_HEIGHT  780
 #define WINDOW_WIDTH  1080
 #define  MAP_CENTER WINDOW_HEIGHT/2
-
+#define RIGHT_CLICK 3
+#define LEFT_CLICK 1
+#define PLAYER_COLOR  0x0000FF
+#define FLOOR_COLOR  0xFFFFFF
+#define WALL_COLOR 0xA0A0A0
+#define SPACE_COLOR  0x000000
+#define MINIMAP_WIDTH 200 
+#define MINIMAP_HEIGHT 200
 typedef struct t_list
 {
 	void			*content;
@@ -66,7 +73,7 @@ typedef struct s_ray
 {
     float x;
     float y;
-    int distance;
+    float distance;
     float projection_wall;
     float angle;
     int hit_wall_v;
@@ -136,10 +143,9 @@ typedef struct  s_map
     t_data      *textures;
 } t_map;
 
-void init_textures(t_map *map);
+void    init_textures(t_map *map);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
-int     t_strlen(const char *str);
 bool    check_extension(char *fileName);
 void    readMap(char *fileName,t_map *map);
 void    displayArray(char **str);
@@ -171,20 +177,19 @@ void    check_color_rang(char **key_value, t_map *map);
 void    DDA(t_map *map,t_coord *pos , float target_x, float target_y, int color);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void    init_data_mlx(t_map *map);
-int	    close_win(t_map *data);
+int	    close_win();
 int	    key_pressed(int code,t_map *map);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstnew(void *content);
 int	    ft_lstsize(t_list *lst);
-int     abs(int n);
 void    draw_3d_view(t_map *map);
 void    draw_3d_map(t_map *map);
-void    draw_2D_map(t_map *map, t_data *data);
-bool    is_wall(t_map map,int x, int y);
+void    draw_mini_map(t_map *map, t_data *data);
+bool    is_wall(t_map map,int x, int y, int flag);
 int     is_up(float angle);
 int     is_right(float angle);
-void    get_fov(t_map *map, float start_angle, float end_angle,int flag);
+void    get_fov(t_map *map, float start_angle, float end_angle);
 float   normalize(float angle);
 t_ray*  ray_data (t_map map,float angle, int flag, t_coord inter_type);
 float   calculate_distance(float x1, float y1, float x2, float y2);
@@ -192,5 +197,5 @@ int     update_player_position(t_map *map, float turn_angle);
 void    free_rays(t_list **rays);
 void	free_double_ptr(char **ptr);
 void	free_struct_args(t_args **ptr);
-
+t_coord horizontal_intersection(t_map map, float angle);
 #endif
