@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_2D_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:37 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/05 19:28:29 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/05 20:25:12 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void init_data_mlx(t_map *map)
     data->mlx = mlx_init();
     if (!data->mlx)
         print_error("error mlx_init");
-    data->win = mlx_new_window(data->mlx, map->max_width * 60,map->map_height* 60, "./cub3d");
+    data->win = mlx_new_window(data->mlx, WINDOW_WIDTH,WINDOW_HEIGHT, "./cub3d");
     if (!data->win)
         print_error("Window can't open try again");
-    data->img = mlx_new_image(data->mlx, map->max_width * 60, map->map_height * 60);
+    data->img = mlx_new_image(data->mlx,WINDOW_WIDTH, WINDOW_HEIGHT);
     if (!data->img)
         print_error("error to create image");   
     data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
@@ -81,16 +81,35 @@ void draw_2D_map(t_map *map, t_data *data)
 {
     int i;
     int j;
-    
+    (void)*data;
+    (void)*map;
     j = 0;
     i = 0;
-    while (map && map->map[i])
+    int tmp_x ;
+    int tmp_y;
+    int player_color = 0x0000FF;
+   int floor_color = 0xFFFFFF;
+ //int sep_color = 0x000000;
+  int  wall_color = 0xA0A0A0;
+    while (i < 200)
     {  
-        j = 0;         
-
-        while (map && map->map[i][j])
+        j = 0;   
+        
+        while (j < 200)
         { 
-            display_frame(data, map, i, j);
+             tmp_x = ((map->player_pos.x - 100 ) + j) /60;
+             tmp_y = ((map->player_pos.y  - 100) + i) /60;
+            if(i == 100 && j == 100)
+               my_mlx_pixel_put(data, j, i, player_color);
+            else if(map->map[tmp_y][tmp_x]==WALL)
+            my_mlx_pixel_put(data, j,i, wall_color);
+           else if(map->map[tmp_y][tmp_x ] == EMPTY)
+           {
+            
+                my_mlx_pixel_put(data, j,i, floor_color);
+           }
+           else
+                my_mlx_pixel_put(data, j, i,  floor_color);
             j++;
         }
         i++;
