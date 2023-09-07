@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/07 19:54:40 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:52:24 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ int update_player_position(t_map *map, float turn_angle)
     moves = map->player_pos.turn_y * map->player_pos.move_speed;
     new_x = map->player_pos.x + cos(normalize(map->player_pos.rotation_angle + turn_angle)) * moves;
     new_y = map->player_pos.y + sin(normalize(map->player_pos.rotation_angle + turn_angle)) * moves;
-    
-   if(is_wall(*map,new_x,new_y,1) == false)
+  
+   if(is_wall(*map,new_x,new_y,1) == false && )
     {
         map->player_pos.x = new_x;
         map->player_pos.y = new_y;
