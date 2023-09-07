@@ -143,6 +143,7 @@ typedef struct  s_map
     t_data      *textures;
 } t_map;
 
+int get_texture_color(t_ray *ray, t_map *map, double *offsetY);
 void    init_textures(t_map *map);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
@@ -198,4 +199,7 @@ void    free_rays(t_list **rays);
 void	free_double_ptr(char **ptr);
 void	free_struct_args(t_args **ptr);
 t_coord horizontal_intersection(t_map map, float angle);
+void set_wall_texture(t_map *map, t_ray *ray, int i, int top_pixel, int bottom_pixel);
+void    set_textures(t_map *map, t_ray *ray, int i);
+void calculateWall_Top_Bottom_pixel(int wall_slice_height, int *top, int *bottom);
 #endif
