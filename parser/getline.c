@@ -6,13 +6,13 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:17 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/15 15:46:20 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:32:50 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
-char *getLine(int fd)
+char *get_line(int fd)
 {
     char character;
     int nbyt;

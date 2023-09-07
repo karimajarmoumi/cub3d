@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/06 21:20:37 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:53:21 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int main(int ac, char **av)
     {
         if (check_extension(av[1]) == true)
         {
-            readMap(av[1],&map);
-            init_data_mlx(&map);
+            parse(av[1],&map);
+             init_data_mlx(&map);
             init_textures(&map);
             draw_3d_map(&map);
             mlx_hook(map.data->win, 2, 1L<<0, key_pressed, &map);

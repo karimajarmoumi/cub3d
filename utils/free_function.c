@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 21:15:02 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/06 21:15:06 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:23:38 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	free_double_ptr(char **ptr)
 		{
 			while (ptr[i])
 			{
+				//printf("lll%s\n",ptr[i]);
 				free(ptr[i]);
 				ptr[i] = NULL;
 				i++;
 			}
 			free(ptr);
+			ptr = NULL;
 		}
 	}
 }
@@ -51,15 +53,15 @@ void	free_struct_args(t_args **ptr)
 		{
 			while (ptr[i])
 			{
-                //printf("%d %s hhhere\n",i,ptr[i]->key);
-              //  printf("%s\n",ptr[i]->value);
-				//free(ptr[i]->key);
-				//free(ptr[i]->value);
-                //free(ptr[i]);
-				//ptr[i] = NULL;
+				ft_free(ptr[i]->key);
+				ptr[i]->key =NULL;
+				free(ptr[i]->value);
+				ptr[i]->value =NULL;
+                free(ptr[i]);
+				ptr[i] = NULL;
 				i++;
 			}
-			//free(ptr);
+			free(ptr);
 		}
 	}
 }
@@ -87,5 +89,19 @@ void free_rays(t_list **list)
         }
         tmp_list = next;
     }
+}
+
+void ft_free_list(t_list *list)
+{
+	char *line;
+	t_list *next;
+	while(list)
+	{ 
+		line = (char*)list->content;
+		ft_free(line);
+		next = list->next;
+		free(list);
+		list = next;
+	}
 }
 
