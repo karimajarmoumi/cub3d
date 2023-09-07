@@ -6,30 +6,12 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:04 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/04 15:40:59 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:44:04 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
-void displayArray(char **str)
-{
-    int i =0;
-    int j;
-
-    while(str[i])
-    {
-        j =0;
-        printf("|");
-        while(str[i][j])
-        {
-            printf("%c",str[i][j]);
-            j++;
-        }
-        printf("|\n");
-        i++;
-    }
-}
  char *copyString(char *src,char *des)
 {
     int i =0;
@@ -42,11 +24,6 @@ void displayArray(char **str)
     }
     tmp[i]='\0';
     return tmp;
-}
-void ft_free(char *str)
-{
-    if(str)
-        free(str);
 }
 
 void print_error(char *msg_error)
@@ -68,48 +45,18 @@ int  count_words(char **str)
     return i;   
 }
 
-void	free_double_ptr(char **ptr)
+int	close_win()
 {
-	int	i;
-
-	i = 0;
-	if (ptr)
-	{
-		if (*ptr)
-		{
-			while (ptr[i])
-			{
-				free(ptr[i]);
-				ptr[i] = NULL;
-				i++;
-			}
-			free(ptr);
-		}
-	}
+    print_error("you exit the game!!!");
+	exit(0);
+	return (0);
 }
 
-
-
-void	free_struct_args(t_args **ptr)
+float normalize(float angle)
 {
-	int	i;
-
-	i = 0;
-	if (ptr)
-	{
-		if (*ptr)
-		{
-			while (ptr[i])
-			{
-                //printf("%d %s hhhere\n",i,ptr[i]->key);
-              //  printf("%s\n",ptr[i]->value);
-				//free(ptr[i]->key);
-				//free(ptr[i]->value);
-                //free(ptr[i]);
-				//ptr[i] = NULL;
-				i++;
-			}
-			//free(ptr);
-		}
-	}
+    if (angle >= 2 * M_PI)
+        angle = remainder(angle, 2 * M_PI);
+    if (angle <= 0)
+        angle += 2 * M_PI;
+    return (angle);
 }
