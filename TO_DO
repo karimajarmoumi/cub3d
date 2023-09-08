@@ -25,4 +25,4 @@ Litte_endian : LE stores the little-end first.
 double posX , posY  //x and y start position player
 double dirX = -1, dirY = 0; //initial player direction
 
-
+//SEG IN INIT_TEXTURES protection of paths

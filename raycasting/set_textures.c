@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:50:29 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/07 21:42:44 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:52:45 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    set_color_of_ceiling(t_map *map, int ray_x, int top_pixel)
    
     pos_start.x = ray_x;
     pos_start.y = 0;
-    DDA(map, &pos_start , ray_x, top_pixel, map->ceiling_color);
+    dda(map, &pos_start , ray_x, top_pixel, map->ceiling_color);
 }
 
 void    set_color_of_floor(t_map *map, int ray_x, int bottom_pixel)
@@ -27,7 +27,7 @@ void    set_color_of_floor(t_map *map, int ray_x, int bottom_pixel)
    
     pos_start.x = ray_x;
     pos_start.y = bottom_pixel; 
-    DDA(map, &pos_start , pos_start.x, WINDOW_HEIGHT, map->floor_color);
+    dda(map, &pos_start , pos_start.x, WINDOW_HEIGHT, map->floor_color);
 }
 
 void set_wall_texture(t_map *map, t_ray *ray, int i, int top_pixel, int bottom_pixel)

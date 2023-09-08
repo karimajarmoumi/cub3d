@@ -86,7 +86,7 @@
 //     {
 //         pos.x = 0;
 //         pos.y = i;
-//         DDA(map, &pos, map->max_width *60, i, map->ceiling_color);
+//         dda(map, &pos, map->max_width *60, i, map->ceiling_color);
 //         i++;
 //     }
 //     //floor
@@ -95,7 +95,7 @@
 //     {
 //         pos.x = 0;
 //         pos.y = i;
-//         DDA(map, &pos, map->max_width *60, i, map->floor_color);
+//         dda(map, &pos, map->max_width *60, i, map->floor_color);
 //         i++;
 //     }
 // }
@@ -153,7 +153,7 @@
 //         pos_start.y = map_center - (ray->projection_wall / 2);
 //         pos_end.x = pos_start.x;
 //         pos_end.y = pos_start.y + ray->projection_wall;
-//        // DDA(map, &pos_start, pos_start.x, pos_start.y + ray->projection_wall, 0xFFFFFF);
+//        // dda(map, &pos_start, pos_start.x, pos_start.y + ray->projection_wall, 0xFFFFFF);
 //         //draw_wall_texture(map, pos_start, pos_end, wall_texture());
 //         // if ( i == 60)
 //         //     break;
