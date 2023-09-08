@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:05 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/04 15:14:31 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:14:49 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,37 +53,59 @@ void map_cpy(char *line, t_player *player, int *i, int height)
     else
        add_spaces_to_line(player, i, line);
 }
-
-void fillArray(t_map *map, t_player *player, char *fileName)
+void display_list(t_list *list)
 {
     char *line;
-    int i;
-    int fd;
-    int j;
-    int count;
 
+    while (list)
+    {
+        line = (char*)list->content;
+       // printf("liine%s\n", line);
+        list = list->next; 
+    }
+}
+void displayArray(char **str)
+{
+    int i =0;
+    int j;
+
+    while(str[i])
+    {
+        j =0;
+        printf("|");
+        while(str[i][j])
+        {
+            printf("%c",str[i][j]);
+            j++;
+        }
+        printf("|\n");
+        i++;
+    }
+}
+void fillArray(t_map *map, t_player *player)
+{
+    int i;
+    int j;
+    char *line;
+    t_list *tmp;
+
+    tmp = player->store_map;
     i = 0;
     j = 0;
-    count = 0;
-    fd = open (fileName,O_RDONLY);
-    line = ft_strdup("");
     map->map = malloc(sizeof(char*) * (map->map_height + 1));
-    player->map_cpy = malloc(sizeof(char*) * (map->map_height + 3));
-    while(line)
+   // player->map_cpy = malloc(sizeof(char*) * (map->map_height + 3));
+    while(tmp)
     {
-       ft_free(line);
-       line = getLine(fd);
-       if(line)
-       {
-            if(count >= map->total_height - map->map_height-1)
-            {
-                map->map[i] = ft_strdup(line);
-                map_cpy(line, player, &j, map->map_height);
-                i++;  
-            }
-            count++;
-       }
+        line = (char*)tmp->content;
+        //printf("===%d\n",ft_strlen(line));
+        map->map[i] = ft_strdup(line);
+      //  map_cpy(line, player, &j, map->map_height);
+       // j++;
+       tmp = tmp->next;
+        i++;
     }
     map->map[i] =  NULL;
-    player->map_cpy[j] =  NULL;
+    //displayArray(map->map);
+   //exit(1);
+   // player->map_cpy[j] =  NULL;
 }

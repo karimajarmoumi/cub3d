@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 21:14:49 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/06 21:14:54 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:11:00 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int check_horizontal_wall(t_map map,t_coord next, float angle, t_coord *coord)
 t_coord get_f_horizontal_intersection(t_map map, float angle, float *dx,float *dy)
 {
     t_coord coord;
+    
     coord.y = floor(map.player_pos.y  / FRAME_HEIGHT);
     if(is_up(angle) == 1)
         coord.y = (coord.y * FRAME_HEIGHT);
@@ -42,7 +43,6 @@ t_coord get_f_horizontal_intersection(t_map map, float angle, float *dx,float *d
         coord.x = map.player_pos.x - fabs(map.player_pos.y - coord.y) / tan(angle);
     else
         coord.x = map.player_pos.x + fabs(map.player_pos.y - coord.y )/ tan(angle);
-  
     *dx = FRAME_HEIGHT/tan(angle);
     if(is_right(angle)== -1 && *dx > 0)
         *dx *= -1;
@@ -59,7 +59,7 @@ t_coord horizontal_intersection(t_map map, float angle)
     float dx;
     float dy;
     t_coord next;
-
+    
     coord = get_f_horizontal_intersection(map, angle, &dx, &dy);
     next.x = coord.x;
     next.y = coord.y;

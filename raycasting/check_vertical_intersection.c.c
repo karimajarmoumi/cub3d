@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/06 21:21:34 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:32:31 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int check_vertical_wall(t_map map,t_coord next, float angle, t_coord *coord)
     }
     return (0);
 }
+
 t_coord vertical_intersection(t_map map,float angle)
 {
     t_coord coord;
@@ -64,7 +65,7 @@ t_coord vertical_intersection(t_map map,float angle)
         if(check_vertical_wall(map,next,angle,&coord) == 1)
             break;
         next.x += dx;
-        next.y += dy;         
+        next.y += dy;        
     }
     if (!coord.hit_wall)
         coord.distance = __FLT_MAX__;
@@ -84,9 +85,10 @@ void get_fov(t_map *map,float start_angle, float end_angle)
         horizontal_coord = horizontal_intersection(*map, normalize(start_angle));
         vertical_coord = vertical_intersection(*map, normalize(start_angle));
         if ((vertical_coord.distance >= horizontal_coord.distance))
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,normalize(start_angle),1,horizontal_coord)));
+
+            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(map,normalize(start_angle),1,horizontal_coord)));
         else
-            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(*map,normalize(start_angle),0,vertical_coord)));
+            ft_lstadd_back(&map->rays,ft_lstnew(ray_data(map,normalize(start_angle),0,vertical_coord)));
        start_angle += ANGLE_FOV  /(float)WINDOW_WIDTH;
     }
 }

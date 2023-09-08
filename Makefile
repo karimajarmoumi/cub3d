@@ -1,4 +1,4 @@
-NAME = cube
+NAME = cub3D
 
 CC = clang
 

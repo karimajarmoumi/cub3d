@@ -6,37 +6,34 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:20:00 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/05 19:09:07 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:53:17 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
-void DDA(t_map *map,t_coord *pos , float target_x, float target_y,int color)
+void dda(t_map *map,t_coord *pos , float target_x, float target_y,int color)
 {
-    float dx;
-    float dy;
-    float Xin=0;
-    float Yin =0;
-    float steps;
-    int i = 0;
+    float next_x;
+    float next_y;
+    float dist;
     float x ;
     float y ;
 
-    dx = (target_x) - pos->x;
-    dy = (target_y) - pos->y;
-    steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
+    if(fabs(target_x - pos->x) > fabs(target_y - pos->y))
+         dist =  fabs(target_x - pos->x);
+    else
+    dist = fabs(target_y - pos->y);
     
-    Xin = dx /(float)steps;
-    Yin = dy /(float)steps;
+    next_x = (target_x - pos->x) /(float)dist;
+    next_y = (target_y - pos->y) /(float)dist;
     x = pos->x;
     y = pos->y;
-    while(i <= steps && x >= 0 && y >= 0)
+    while(dist >= 0  && x >= 0 && y >= 0)
     {
         my_mlx_pixel_put(map->data, x, y,color);
-        x += Xin ;
-        y += Yin  ;
-        i++;
+        x += next_x;
+        y += next_y  ;
+        dist--;
     }
-    //printf("%f %f\n",target_y,steps);
 }
