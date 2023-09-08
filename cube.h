@@ -99,6 +99,7 @@ typedef struct  s_player
     int     count_player;
     char    **map_cpy;
     int      map_begin;
+    t_list *store_map;
 }t_player;
 
 typedef struct s_coord
@@ -131,7 +132,6 @@ typedef struct s_args
 typedef struct  s_map
 {
     int         map_height;
-    int         total_height;
     int         max_width;
     int         floor_color;
     int         ceiling_color;
@@ -148,11 +148,11 @@ void    init_textures(t_map *map);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_strdup(const char *s1);
 bool    check_extension(char *fileName);
-void    readMap(char *fileName,t_map *map);
+void    parse(char *fileName,t_map *map);
 void    displayArray(char **str);
-char    *getLine(int fd);
+char    *get_line(int fd);
 char    *copyString(char *src,char *des);
-void    fillArray(t_map *map,t_player *player, char *fileName);
+void    fillArray(t_map *map,t_player *player);
 void    ft_free(char *str);
 char    *ft_charjoin(char const *s1, char character);
 void    print_error(char *msg_error);
@@ -170,7 +170,7 @@ int	    ft_strcmp(char *s1, char *s2);
 int     ft_atoi(const char *str);
 int     count_words(char **str);
 int		ft_isdigit(int c);
-char    **split_identifier(char *line,char **key_value,int *identifier);
+char    **split_identifier(char *line,int *identifier);
 int     is_identifier(char *key_value);
 void    affect_value(t_args **arg,char *key,char *value);
 void    check_identifier(char *line, t_map *map,int *count);
@@ -187,7 +187,7 @@ int	    ft_lstsize(t_list *lst);
 void    draw_3d_view(t_map *map);
 void    draw_3d_map(t_map *map);
 void    draw_mini_map(t_map *map, t_data *data);
-bool    is_wall(t_map map,int x, int y, int flag);
+bool    is_wall(t_map map,float  x, float  y, int flag);
 int     is_up(float angle);
 int     is_right(float angle);
 void    get_fov(t_map *map, float start_angle, float end_angle);
@@ -199,6 +199,7 @@ void    free_rays(t_list **rays);
 void	free_double_ptr(char **ptr);
 void	free_struct_args(t_args **ptr);
 t_coord horizontal_intersection(t_map map, float angle);
+void ft_free_list(t_list *list);
 void set_wall_texture(t_map *map, t_ray *ray, int i, int top_pixel, int bottom_pixel);
 void    set_textures(t_map *map, t_ray *ray, int i);
 void calculateWall_Top_Bottom_pixel(int wall_slice_height, int *top, int *bottom);

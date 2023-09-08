@@ -3,22 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   check_errors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:50:20 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/05 18:57:14 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:14:39 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cube.h"
 
+int is_wrong_character(char character)
+{
+	if (character != WALL && character != EMPTY && character != PLAYER_W 
+		&& character != PLAYER_E && character != PLAYER_S && character != PLAYER_N && character != SPACE)
+		return 1;
+	return 0;
+}
+int is_player(char character)
+{
+	if(character == PLAYER_W || character == PLAYER_E || character == PLAYER_S || character == PLAYER_N)
+		return 1;
+	return 0;
+}
 void	check_player_symbol(char character, t_player *player, int x, t_map *map)
 {
-	if (character == PLAYER_W || character == PLAYER_E 
-		|| character == PLAYER_S || character == PLAYER_N)
+	if (is_player(character))
 	{
 		map->player_pos.player_symbol = character;
-		player->flag_on = 1;
 		player->count_player++;
 		map->player_pos.x = (x * FRAME_WIDTH) + FRAME_WIDTH / 2;
 		map->player_pos.y = (map->map_height * FRAME_HEIGHT) + FRAME_WIDTH / 2;
@@ -31,10 +42,7 @@ void	check_player_symbol(char character, t_player *player, int x, t_map *map)
 		if (character == PLAYER_W)
 			map->player_pos.rotation_angle = WEST_ANGLE;
 	}
-	if (character != WALL && character != EMPTY && character != PLAYER_W 
-		&& character != PLAYER_E && character != PLAYER_S && character 
-		!= PLAYER_N && character != SPACE)
-		print_error("wrong character");
+
 }
 
 void	check_player(t_player *player, char *line, t_map *map)
@@ -46,18 +54,14 @@ void	check_player(t_player *player, char *line, t_map *map)
 		print_error("map invalid");
 	while (line && line[i])
 	{
-		if (player->flag_on == 0)
-			check_player_symbol(line[i], player, i, map);
-		else
-		{
-			if (line[i] == map->player_pos.player_symbol)
-				player->count_player++;
-			if (player->count_player > 1)
-				print_error("there is an error in counting player");
-			if ((line[i] != WALL && line[i] != EMPTY && line[i]
-					!= map->player_pos.player_symbol && line[i] != SPACE))
+		if (is_wrong_character(line[i]))
 				print_error("wrong character");
-		}
+		if(player->count_player == 0)
+			check_player_symbol(line[i], player, i, map);
+		else if (is_player(line[i]))
+				player->count_player++;
+		if (player->count_player > 1)
+				print_error("there is an error in counting player");
 		i++;
 	}
 }

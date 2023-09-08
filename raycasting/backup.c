@@ -1,5 +1,5 @@
 
-// #include "../cube.h"
+#include "../cube.h"
 
 // void display_frame(t_data *data, t_map *map, int i, int j)
 // {
@@ -74,17 +74,6 @@
 //         }
 // }
 
-// void display_list(t_list *list)
-// {
-//     t_ray *ray;
-
-//     while (list)
-//     {
-//         ray = (t_ray*)list->content;
-//         printf("%f %f %d\n", ray->x,ray->y,ray->distance);
-//         list = list->next; 
-//     }
-// }
 
 // void draw_ceiling_floor(t_map *map, int map_center)
 // {

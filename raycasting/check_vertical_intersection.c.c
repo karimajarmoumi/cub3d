@@ -6,7 +6,7 @@
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/06 21:21:34 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:21:52 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_coord vertical_intersection(t_map map,float angle)
         if(check_vertical_wall(map,next,angle,&coord) == 1)
             break;
         next.x += dx;
-        next.y += dy;         
+        next.y += dy;        
     }
     if (!coord.hit_wall)
         coord.distance = __FLT_MAX__;

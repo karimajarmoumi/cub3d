@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_map.c                                         :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/05 17:56:40 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:35:53 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_position init_p(t_position *player)
     player->y = -1;
     player->turn_x = 0;
     player->turn_y = 0;
-    player->move_speed = 5;
+    player->move_speed = 2;
     return (*player);
 }
 
@@ -48,7 +48,6 @@ void init_map(t_player *player, t_map *map)
     map->args[6] = NULL;   
     map->map_height = 0;
     map-> max_width = 0;
-    map-> total_height = 0;
 }
 
 void store_map_mesurer(t_map *map,char *line)
@@ -63,41 +62,63 @@ void store_map_mesurer(t_map *map,char *line)
             map->max_width = current_width;
     }
 }
-
-void readMap(char *fileName, t_map *map)
+void get_configs(int fd,t_map *map)
 {
-    int         fd;
-    int         count;
-    char        *line;
-    t_player    player;
-
-    count = 0;
-    init_map(&player, map);
-    line = ft_strdup("");
-    fd = open (fileName, O_RDONLY);
-    while (line)
+    char *line= get_line(fd);
+    int count =0;
+    while(line && count < 6)
     {
-        ft_free(line);
-        line = getLine(fd);
-        if(line && ft_strcmp(line,"") && !player.map_begin && count == 6)
-            player.map_begin = 1;
-        if(line && count < 6)
+        if(ft_strcmp(line,""))
             check_identifier(line, map, &count);
-        else if(count == 6 && player.map_begin == 1)
-        {
-            check_player(&player, line, map);
-            store_map_mesurer(map,line);
-        }   
-        map->total_height++;
+        ft_free(line);
+        line = get_line(fd);
     }
     ft_free(line);
     if (count < 6)
         print_error("there is a problem with identifier");
-    map->map_height--;
+}
+
+void   read_map(int fd, t_map *map, t_player *player)
+{
+    char *line;
+    t_list *tmp ;
+    int flag;
+    
+    line = get_line(fd);
+    flag = 0;
+    player->store_map = NULL;
+    tmp = player->store_map;
+    while(line)
+    {
+        if(ft_strcmp(line,""))
+            flag = 1;
+        if(flag == 1)
+        {
+            check_player(player, line, map);
+            store_map_mesurer(map,line);
+            ft_lstadd_back(&(player->store_map),ft_lstnew(ft_strdup(line)));
+        }
+        free(line);
+        line = get_line(fd);
+    }
+    if(player->count_player == 0)
+        print_error("there is no player");
     if(!map->map_height)
         print_error("there is no map");
-    fillArray(map, &player,fileName);
+}
+
+void parse(char *file_name, t_map *map)
+{
+    int         fd;
+    t_player    player;
+
+    init_map(&player, map);
+    fd = open (file_name, O_RDONLY);
+    get_configs(fd,map);
+    read_map(fd, map, &player);
+    fillArray(map, &player);
    // flood_fill(&player, map->player_pos.y + 1, map->player_pos.x + 1);
-    free_struct_args(map->args);
-    free_double_ptr(player.map_cpy);
+    ft_free_list(player.store_map);
+ //   free_struct_args(map->args);
+   // free_double_ptr(player.map_cpy);
 }
