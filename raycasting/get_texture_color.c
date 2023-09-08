@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:54:54 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/07 21:42:39 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/08 19:06:51 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void calculateWall_Top_Bottom_pixel(int wall_slice_height, int *top, int *bottom)
 {
     *top = (WINDOW_HEIGHT / 2) - (wall_slice_height / 2);
-    if (*top < 0 || *top >= WINDOW_HEIGHT)
-        *top = 0;
+    // if (*top < 0 )
+    //     *top = 0;
     *bottom = *top + wall_slice_height ;
     if (*bottom >= WINDOW_HEIGHT || *bottom < 0)
         *bottom = WINDOW_HEIGHT;
@@ -26,7 +26,8 @@ unsigned int  get_pixel_color(t_data *t, double x, double y)
 {
 	char	*dst = NULL;
   
-	dst = t->addr + ((int)y * t->line_length + (int)x * (t->bits_per_pixel / 8));
+    if (x >= 0 && y >= 0 && x < WINDOW_HEIGHT && y < WINDOW_WIDTH)
+	    dst = t->addr + ((int)y * t->line_length + (int)x * (t->bits_per_pixel / 8));
     return (*(unsigned int *)dst);
 }
 
@@ -47,7 +48,7 @@ int get_texture_color(t_ray *ray, t_map *map, double *offsetY)
             (*offsetY) += (map->textures[0].height / ray->projection_wall ) ;
             return (get_pixel_color(&map->textures[0], calculate_offsetX(ray, 1, &map->textures[0]), *offsetY));
         }
-        else 
+        else
         {
             *offsetY += map->textures[1].height / ray->projection_wall;
             return (get_pixel_color(&map->textures[1], calculate_offsetX(ray, 1, &map->textures[1]), *offsetY)); 

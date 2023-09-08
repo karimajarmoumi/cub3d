@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/07 22:52:24 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/08 18:24:28 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,12 @@ bool is_wall(t_map map, float x, float y, int flag)
                 map.map[(int)new_y][(int)floor(map.player_pos.x / FRAME_WIDTH)] ==  WALL)
             return true;
         }
+        //printf("heeere %f %f\n",new_x,new_y);
         if(map.map[(int)new_y][(int)new_x] != '1')
+        {
+           // printf("%f %f\n",map.player_pos.x, map.player_pos.y);
             return (false);
+        }
     }
     return (true);
 }
@@ -48,7 +52,7 @@ int update_player_position(t_map *map, float turn_angle)
     new_x = map->player_pos.x + cos(normalize(map->player_pos.rotation_angle + turn_angle)) * moves;
     new_y = map->player_pos.y + sin(normalize(map->player_pos.rotation_angle + turn_angle)) * moves;
   
-   if(is_wall(*map,new_x,new_y,1) == false && )
+   if(is_wall(*map,new_x,new_y,1) == false )
     {
         map->player_pos.x = new_x;
         map->player_pos.y = new_y;
@@ -68,7 +72,6 @@ int	key_pressed(int code,t_map *map)
 {
     float turn_angle;
     init_vars(&(map->player_pos.turn_x), &(map->player_pos.turn_y), &turn_angle);
-    turn_angle = 0;
     if (code == LEFT)
     {
         map->player_pos.turn_y = 1;

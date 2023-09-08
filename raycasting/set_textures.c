@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:50:29 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/07 21:42:44 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/08 21:55:40 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ void set_wall_texture(t_map *map, t_ray *ray, int i, int top_pixel, int bottom_p
     
     offsetY = 0;
     y = top_pixel;
+    if (y < 0)
+    {
+        offsetY = (64 / ray->projection_wall) * abs(y); 
+        y = 0;
+    }
     while (y < bottom_pixel)
     {
         my_mlx_pixel_put(map->data, i,  y, get_texture_color(ray, map, &offsetY));

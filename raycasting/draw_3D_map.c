@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_3D_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:29 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/07 22:48:49 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:46:38 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,14 @@
 void draw_3d_view(t_map *map)
 {
     int     i;
-    t_coord pos_start;
-    t_coord pos_end;
     t_ray   *ray;
     t_list *tmp_list;
 
-    tmp_list = map->rays;
-    
     i = 0;
+    tmp_list = map->rays;
     while(tmp_list &&  i < WINDOW_WIDTH)
     {
         ray = (t_ray*)tmp_list->content;
-        pos_start.x = i;
-        pos_start.y = MAP_CENTER - (ray->projection_wall / 2);
-        pos_end.x = pos_start.x;
-        pos_end.y = pos_start.y + ray->projection_wall;
         set_textures(map, ray, i);
         tmp_list = tmp_list->next;
         i++;
