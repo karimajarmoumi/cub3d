@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/08 18:24:28 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/08 22:16:58 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ bool is_wall(t_map map, float x, float y, int flag)
     
     new_x = x / FRAME_WIDTH;
     new_y = y / FRAME_HEIGHT;
-    len_line = ft_strlen(map.map[(int)new_y]);
+    //if(map.map[(int)new_y])
+        len_line = ft_strlen(map.map[(int)new_y]);
     if( new_x > 0 && new_y > 0 &&  new_y < map.map_height && new_x < len_line)
     {
         if(flag == 1)
@@ -52,7 +53,7 @@ int update_player_position(t_map *map, float turn_angle)
     new_x = map->player_pos.x + cos(normalize(map->player_pos.rotation_angle + turn_angle)) * moves;
     new_y = map->player_pos.y + sin(normalize(map->player_pos.rotation_angle + turn_angle)) * moves;
   
-   if(is_wall(*map,new_x,new_y,1) == false )
+   if(is_wall(*map,new_x,new_y,1) == false)
     {
         map->player_pos.x = new_x;
         map->player_pos.y = new_y;
@@ -96,6 +97,8 @@ int	key_pressed(int code,t_map *map)
        print_error("you exit the program");
     }
     if(update_player_position(map, turn_angle) == 1)
+    {
             draw_3d_map(map);
+    }
 	return (code);
 }

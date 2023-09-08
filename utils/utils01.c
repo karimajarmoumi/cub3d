@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils01.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:04 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/06 20:44:04 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/08 12:08:52 by kel-baam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
  char *copyString(char *src,char *des)
 {
-    int i =0;
+    int i;
     char *tmp;
+    
     tmp = des;
+    i = 0;
     while(src[i])
     {
         tmp[i]=src[i];
@@ -29,7 +31,8 @@
 void print_error(char *msg_error)
 {
     int len;
-    len =ft_strlen(msg_error);
+    
+    len = ft_strlen(msg_error);
     write(2,msg_error,len);
     write(2,"\n",1);
     exit(1);
