@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_vertical_intersection.c.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/08 14:32:31 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 t_coord get_f_vertical_intersection(t_map map, float angle, float *dx,float *dy)
 {

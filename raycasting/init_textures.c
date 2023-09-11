@@ -6,12 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:51:24 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/07 21:55:34 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
-
+#include "../cub3D.h"
 
 void init_texture(t_map *map, int id_t, char *path_image)
 {
@@ -19,9 +18,11 @@ void init_texture(t_map *map, int id_t, char *path_image)
     map->textures[id_t].win = map->data->win;
     map->textures[id_t].img = mlx_xpm_file_to_image(map->textures[id_t].mlx, path_image
     , &map->textures[id_t].width, &map->textures[id_t].height);
+    if (!map->textures[id_t].img)
+        print_error("** ERROR IN WALL TEXTURE");
     map->textures[id_t].addr = mlx_get_data_addr(map->textures[id_t].img, &map->textures[id_t].bits_per_pixel, 
         &map->textures[id_t].line_length, &map->textures[id_t].endian);
-    if (!map->textures[id_t].img || !map->textures[id_t].addr)
+    if (!map->textures[id_t].addr)
         print_error("** ERROR IN WALL TEXTURE");
 }
 

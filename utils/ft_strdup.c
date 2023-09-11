@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 21:27:38 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/08 12:14:07 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:18:27 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 char	*ft_strdup(const char *s1)
 {
@@ -32,17 +32,30 @@ char	*ft_strdup(const char *s1)
 	return (ptr);
 }
 
-int find_space_pos(char *str)
+int find_space_pos(char *str, int *key_end_pos)
 {
 	int i;
-	
+	int flag;
+
+	flag = 0;
 	i = 0;
-	while(str[i])
+
+	while (str[i])
 	{
-		if(str[i] == ' ')
-			return i;
+		if (str[i] == ' ' || str[i] == 9)
+		{
+			if (flag == 0)
+			{
+				*key_end_pos = i;
+				flag = 1;
+			}
+		}
+		else if(flag == 1)
+			return i - 1;
 		i++;
+		
 	}
+	*key_end_pos = i;
 	return i;
 }
 
@@ -50,15 +63,17 @@ int find_space_pos(char *str)
 void separate_two_words(char *str,char **arg1,char **arg2)
 {
 	int i ;
-	int start;
-	int len;
+	int start_value;
+	int key_end;
+	int len =0;
 	
+	start_value = 0;
 	i = 0;
-	start = find_space_pos(str);
-	*arg1 = malloc(sizeof(char)*(start+1));
+	start_value = find_space_pos(str,&key_end);
+	*arg1 = malloc(sizeof(char)*(key_end+1));
 	if(str)
 		len = ft_strlen(str);
-	while(i <start)
+	while(i <key_end)
 	{
 		arg1[0][i] = str[i];
 		i++;
@@ -67,5 +82,5 @@ void separate_two_words(char *str,char **arg1,char **arg2)
 	if(i == len)
 		*arg2 =NULL;
 	else
-		*arg2 = ft_strdup(&str[i + 1]);
+		*arg2 = ft_strdup(&str[start_value + 1]);
 }

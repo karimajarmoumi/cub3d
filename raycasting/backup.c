@@ -1,5 +1,5 @@
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 // void display_frame(t_data *data, t_map *map, int i, int j)
 // {

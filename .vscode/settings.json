@@ -4,9 +4,10 @@
     },
 
 	"files.associations": {
-		"*.embeddedhtml": "html",
-		"stdlib.h": "c"
-	},
+        "*.embeddedhtml": "html",
+        "stdlib.h": "c",
+        "NEW.C": "cpp"
+    },
 
     "terminal.integrated.profiles.linux": {
         "zsh": {
