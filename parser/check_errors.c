@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:50:20 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/08 22:16:14 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 21:19:39 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 int	is_wrong_character(char character)
 {

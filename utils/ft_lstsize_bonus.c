@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/17 17:23:33 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/24 12:00:56 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 int	ft_lstsize(t_list *lst)
 {

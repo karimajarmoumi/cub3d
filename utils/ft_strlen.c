@@ -6,16 +6,17 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 19:01:33 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/13 16:16:08 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 21:16:29 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 int ft_strlen(const char *str)
 {
     int i =0;
-    while(str[i])
+    
+    while(str && str[i])
             i++;
     return i;
 }

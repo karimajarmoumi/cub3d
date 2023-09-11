@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:18:09 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/08 22:58:02 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 int	check_commas(char *str)
 {

@@ -6,17 +6,15 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 15:54:54 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/08 19:06:51 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 21:18:32 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 void calculateWall_Top_Bottom_pixel(int wall_slice_height, int *top, int *bottom)
 {
     *top = (WINDOW_HEIGHT / 2) - (wall_slice_height / 2);
-    // if (*top < 0 )
-    //     *top = 0;
     *bottom = *top + wall_slice_height ;
     if (*bottom >= WINDOW_HEIGHT || *bottom < 0)
         *bottom = WINDOW_HEIGHT;

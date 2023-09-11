@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:51:24 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/08 14:50:48 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 void init_texture(t_map *map, int id_t, char *path_image)
 {

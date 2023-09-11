@@ -39,8 +39,8 @@
 #define RIGHT_ROTATE  65363
 #define LEFT_ROTATE  65361
 #define ESC  65307
-#define FRAME_WIDTH  60
-#define FRAME_HEIGHT 60
+#define FRAME_WIDTH  30
+#define FRAME_HEIGHT 30
 #define NORD_ANGLE  (M_PI / 2) * 3
 #define EAST_ANGLE 0
 #define SOUTH_ANGLE M_PI/2
@@ -115,8 +115,8 @@ typedef struct s_position
     float x;
     float y;
     char  player_symbol;
-    int turn_x;
-    int turn_y;
+    int player_rotation;
+    int player_moves;
     float rotation_angle;
     int move_speed;
     int half_fov;
@@ -206,4 +206,5 @@ int check_commas(char *str);
 void store_color_value(int *store_color, char *red, char *green, char *blue);
 void    affect_value(t_args **arg,char *key,char *value);
 int is_identifier(char *key_value);
+bool    check_map(char **map);
 #endif

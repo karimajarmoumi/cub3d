@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:05 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/08 23:07:51 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 void	line_of_spaces(t_player *player, int *i, char *line)
 {

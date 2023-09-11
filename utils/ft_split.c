@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/23 20:03:47 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/08/14 20:10:21 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 static int	len_words(char const *s, char c)
 {
 	int	i;

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/12 15:13:47 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/06/03 18:28:50 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

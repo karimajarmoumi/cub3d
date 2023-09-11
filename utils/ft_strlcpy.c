@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kjarmoum <kjarmoum@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 10:22:20 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/08/12 10:23:32 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {

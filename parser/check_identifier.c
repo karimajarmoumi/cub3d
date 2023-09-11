@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 22:15:39 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/08 22:48:37 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:21:37 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 void	check_color_rang(char *key, char *value, t_map *map)
 {

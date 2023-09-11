@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 12:20:00 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/08 13:53:17 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 void dda(t_map *map,t_coord *pos , float target_x, float target_y,int color)
 {
