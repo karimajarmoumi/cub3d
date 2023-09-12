@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kel-baam <kel-baam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:26 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/07 16:53:21 by kel-baam         ###   ########.fr       */
+/*   Updated: 2023/09/12 23:35:01 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cube.h"
+#include "cub3D.h"
 
-int mouse_hook(int code,int x, int y ,t_map *map)
+int mouse_hook(int code, int x, int y, t_map *map)
 {
+    int     turn_angle;
     (void)x;
     (void)y;
-    int turn_angle;
     
     turn_angle = 0;
-    if(code == RIGHT_CLICK)
-        map->player_pos.turn_x = 1;
-    if(code == LEFT_CLICK)
-        map->player_pos.turn_x = -1;
+    if (code == RIGHT_CLICK)
+        map->player_pos.player_rotation = 1;
+    if (code == LEFT_CLICK)
+        map->player_pos.player_rotation = -1;
     update_player_position(map, turn_angle);
-   draw_3d_map(map);
+    draw_3d_map(map);
     return (1);
 }
 
@@ -37,7 +37,7 @@ int main(int ac, char **av)
         if (check_extension(av[1]) == true)
         {
             parse(av[1],&map);
-             init_data_mlx(&map);
+            init_data_mlx(&map);
             init_textures(&map);
             draw_3d_map(&map);
             mlx_hook(map.data->win, 2, 1L<<0, key_pressed, &map);
@@ -47,8 +47,8 @@ int main(int ac, char **av)
             mlx_loop(map.data->mlx);
         }
         else
-            print_error("wrong extension");
+            print_error("Wrong extension");
     }
     else
-        write(1, "Please enter a file name\n",25);
+        print_error("Please enter a file name");
 }

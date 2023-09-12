@@ -6,16 +6,16 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:50:20 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/08 22:16:14 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 21:19:39 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 int	is_wrong_character(char character)
 {
-	if (character != WALL && character != EMPTY && character != PLAYER_W 
-		&& character != PLAYER_E && character != PLAYER_S 
+	if (character != WALL && character != EMPTY && character != PLAYER_W
+		&& character != PLAYER_E && character != PLAYER_S
 		&& character != PLAYER_N && character != SPACE)
 		return (1);
 	return (0);
@@ -23,8 +23,8 @@ int	is_wrong_character(char character)
 
 int	is_player(char character)
 {
-	if (character == PLAYER_W || character == PLAYER_E 
-		|| character == PLAYER_S || character == PLAYER_N)
+	if (character == PLAYER_W || character == PLAYER_E || character == PLAYER_S
+		|| character == PLAYER_N)
 		return (1);
 	return (0);
 }

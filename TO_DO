@@ -26,3 +26,12 @@ double posX , posY  //x and y start position player
 double dirX = -1, dirY = 0; //initial player direction
 
 //SEG IN INIT_TEXTURES protection of paths
+SKIP SPACES IN END OF PATHS
+
+
+
+EA        . /textures/EA.xpm
+EA        . /textures/EA.xpm      LEAK
+
+
+CHECK textures before opening window

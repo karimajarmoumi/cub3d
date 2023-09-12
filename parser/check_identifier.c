@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 22:15:39 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/08 22:48:37 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 17:21:37 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 void	check_color_rang(char *key, char *value, t_map *map)
 {
@@ -27,11 +27,11 @@ void	check_color_rang(char *key, char *value, t_map *map)
 		if (check_commas(value) != 2 || count_words(range) != 3)
 			print_error("this is not ab RGB format");
 		if (!ft_strcmp(key, "F"))
-			store_color_value(&(map->floor_color), range[0],
-				range[1], range[2]);
+			store_color_value(&(map->floor_color), range[0], range[1],
+				range[2]);
 		else if (!ft_strcmp(key, "C"))
-			store_color_value(&(map->ceiling_color), range[0],
-				range[1], range[2]);
+			store_color_value(&(map->ceiling_color), range[0], range[1],
+				range[2]);
 		free_double_ptr(range);
 	}
 }

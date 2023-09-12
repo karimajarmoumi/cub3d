@@ -6,11 +6,11 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:18:09 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/08 22:58:02 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "../cub3D.h"
 
 int	check_commas(char *str)
 {
@@ -45,9 +45,8 @@ void	store_color_value(int *store_color, char *red, char *green, char *blue)
 	num1 = ft_atoi(red);
 	num2 = ft_atoi(green);
 	num3 = ft_atoi(blue);
-	if (num1 < MIN_RANGE || num1 > MAX_RANGE
-		|| num2 < MIN_RANGE || num2 > MAX_RANGE 
-		|| num3 < MIN_RANGE || num3 > MAX_RANGE)
+	if (num1 < MIN_RANGE || num1 > MAX_RANGE || num2 < MIN_RANGE
+		|| num2 > MAX_RANGE || num3 < MIN_RANGE || num3 > MAX_RANGE)
 		print_error("error in range color");
 	*store_color = rgb_to_int(num1, num2, num3);
 }
