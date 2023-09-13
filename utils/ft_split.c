@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../cub3D.h"
+
 static int	len_words(char const *s, char c)
 {
 	int	i;
@@ -77,11 +78,11 @@ static void	free_memory(char **str, int len)
 	{
 		while (i < len && str[i])
 		{
-			free (str[i]);
+			free(str[i]);
 			str[i] = NULL;
 			i++;
 		}
-		free (str);
+		free(str);
 	}
 }
 

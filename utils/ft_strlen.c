@@ -12,11 +12,12 @@
 
 #include "../cub3D.h"
 
-int ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
-    int i =0;
-    
-    while(str && str[i])
-            i++;
-    return i;
+	int	i;
+
+	i = 0;
+	while (str && str[i])
+		i++;
+	return (i);
 }

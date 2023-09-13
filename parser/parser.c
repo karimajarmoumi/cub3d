@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 09:59:48 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/12 21:39:44 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:17:07 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,4 @@ void	parse(char *file_name, t_map *map)
 	if (!check_map(map->map))
 		print_error("MAP invalid");
 	ft_free_list(player.store_map);
-	//   free_struct_args(map->args);
-	// free_double_ptr(player.map_cpy);
 }

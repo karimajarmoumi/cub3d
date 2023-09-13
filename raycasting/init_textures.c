@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:51:24 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/12 22:43:20 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:25:17 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ void	init_textures(t_map *map)
 	i = 0;
 	while (i < 4)
 	{
-		if (map->args[i]->key[0] == 'N')
+		if (map->args[i]->key[0] == PLAYER_N)
 			init_texture(map, 0, map->args[i]->value);
-		else if (map->args[i]->key[0] == 'S')
+		else if (map->args[i]->key[0] == PLAYER_S)
 			init_texture(map, 1, map->args[i]->value);
-		else if (map->args[i]->key[0] == 'E')
+		else if (map->args[i]->key[0] == PLAYER_E)
 			init_texture(map, 2, map->args[i]->value);
 		else
 			init_texture(map, 3, map->args[i]->value);

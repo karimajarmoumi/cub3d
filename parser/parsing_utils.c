@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 12:18:09 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 19:12:44 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ void	affect_value(t_args **arg, char *key, char *value)
 		(*arg)->flag = 0;
 	}
 	else
+	{
+		if ((*arg)->flag > 1)
+			print_error("a path is duplicated");
 		(*arg)->value = ft_strdup(value);
+	}
 }
 
 int	is_identifier(char *key_value)

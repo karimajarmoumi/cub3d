@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 18:33:56 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/12 23:06:19 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:47:05 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,11 @@ int	update_player_position(t_map *map, float turn_angle)
 	int		moves;
 	float	new_x;
 	float	new_y;
+	float	rotation_speed;
 
+	rotation_speed = M_PI / 36;
 	map->player_pos.rotation_angle += map->player_pos.player_rotation
-		* ROTATION_SPEED;
+		* rotation_speed;
 	map->player_pos.rotation_angle = normalize(map->player_pos.rotation_angle);
 	moves = map->player_pos.player_moves * map->player_pos.move_speed;
 	new_x = map->player_pos.x + cos(normalize(map->player_pos.rotation_angle
@@ -69,23 +71,21 @@ void	init_vars(int *player_rotation, int *player_moves, float *turn_angle)
 
 int	key_pressed(int code, t_map *map)
 {
-	float	turn_angle;
-
 	init_vars(&(map->player_pos.player_rotation),
-		&(map->player_pos.player_moves), &turn_angle);
+		&(map->player_pos.player_moves), &map->player_pos.turn_angle);
 	if (code == LEFT)
 	{
 		map->player_pos.player_moves = 1;
-		turn_angle = -90 * (M_PI / 180);
+		map->player_pos.turn_angle = -90 * (M_PI / 180);
 	}
 	if (code == RIGHT)
 	{
 		map->player_pos.player_moves = 1;
-		turn_angle = 90 * (M_PI / 180);
+		map->player_pos.turn_angle = 90 * (M_PI / 180);
 	}
-	if (code == UP)
+	if (code == UP || code == UP_KEY)
 		map->player_pos.player_moves = 1;
-	if (code == DOWN)
+	if (code == DOWN || code == DOWN_KEY)
 		map->player_pos.player_moves = -1;
 	if (code == LEFT_ROTATE)
 		map->player_pos.player_rotation = -1;
@@ -93,9 +93,7 @@ int	key_pressed(int code, t_map *map)
 		map->player_pos.player_rotation = 1;
 	if (code == ESC)
 		print_error("you exit the program");
-	if (update_player_position(map, turn_angle) == 1)
-	{
+	if (update_player_position(map, map->player_pos.turn_angle) == 1)
 		draw_3d_map(map);
-	}
 	return (code);
 }

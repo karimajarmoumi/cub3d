@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 15:46:05 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/12 22:06:32 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:47:33 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void	fill_map(t_map *map, t_player *player)
 {
 	char	*line;
 	t_list	*tmp;
-	int		j;
 	int		i;
 
 	tmp = player->store_map;
 	i = 0;
-	j = 0;
 	map->map = malloc(sizeof(char *) * (map->map_height + 1));
 	while (tmp)
 	{

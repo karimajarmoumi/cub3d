@@ -2,7 +2,7 @@ NAME = cub3D
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address 
 SUB = *.c ./utils/*.c ./parser/*.c ./raycasting/*.c
 
 OBJ =  *.o ./utils/*.o ./parser/*.o ./raycasting/*.o

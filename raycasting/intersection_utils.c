@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:49:52 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:40:11 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,20 @@ int	is_right(float angle)
 	return (-1);
 }
 
-t_ray	*ray_data(t_map *map, float angle, int flag, t_coord inter_type)
+t_ray	ray_data(t_map *map, float angle, int flag, t_coord inter_type)
 {
-	t_ray	*ray;
+	t_ray	ray;
 
-	ray = NULL;
-	ray = malloc(sizeof(t_ray));
-	ray->x = inter_type.x;
-	ray->y = inter_type.y;
-	ray->distance = inter_type.distance * cos(map->player_pos.rotation_angle
+	ray.x = inter_type.x;
+	ray.y = inter_type.y;
+	ray.distance = inter_type.distance * cos(map->player_pos.rotation_angle
 			- angle);
-	ray->angle = angle;
-	ray->projection_wall = (FRAME_HEIGHT * ((WINDOW_WIDTH / 2) / tan(ANGLE_FOV
-					/ 2))) / ray->distance;
+	ray.angle = angle;
+	ray.projection_wall = (FRAME_HEIGHT * ((WINDOW_WIDTH / 2) / tan((M_PI / 3)
+					/ 2))) / ray.distance;
 	if (flag == 1)
-		ray->hit_wall_h = 1;
+		ray.hit_wall_h = 1;
 	else
-		ray->hit_wall_v = 1;
+		ray.hit_wall_v = 1;
 	return (ray);
 }

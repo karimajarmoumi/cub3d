@@ -6,16 +6,16 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 21:15:02 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/11 15:59:06 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 15:04:23 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void ft_free(char *str)
+void	ft_free(char *str)
 {
-    if(str)
-        free(str);
+	if (str)
+		free(str);
 }
 
 void	free_double_ptr(char **ptr)
@@ -29,7 +29,6 @@ void	free_double_ptr(char **ptr)
 		{
 			while (ptr[i])
 			{
-				//printf("lll%s\n",ptr[i]);
 				free(ptr[i]);
 				ptr[i] = NULL;
 				i++;
@@ -39,8 +38,6 @@ void	free_double_ptr(char **ptr)
 		}
 	}
 }
-
-
 
 void	free_struct_args(t_args **ptr)
 {
@@ -54,10 +51,10 @@ void	free_struct_args(t_args **ptr)
 			while (ptr[i])
 			{
 				ft_free(ptr[i]->key);
-				ptr[i]->key =NULL;
+				ptr[i]->key = NULL;
 				free(ptr[i]->value);
-				ptr[i]->value =NULL;
-                free(ptr[i]);
+				ptr[i]->value = NULL;
+				free(ptr[i]);
 				ptr[i] = NULL;
 				i++;
 			}
@@ -66,42 +63,43 @@ void	free_struct_args(t_args **ptr)
 	}
 }
 
-void free_rays(t_list **list)
+void	free_rays(t_list **list)
 {
-    t_list *tmp_list =NULL;
-    t_ray *tmp_ray;
-    t_list *next;
-    tmp_list = *list;
-    
-    while(tmp_list)
-    {
-        tmp_ray=(t_ray*)((tmp_list)->content);
-        if(tmp_ray)
-        {
-            free(tmp_ray);
-            tmp_ray =NULL;
-        }
-        next = (tmp_list)->next;
-        if(tmp_list)
-        {
-            free(tmp_list);
-            tmp_list =NULL;
-        }
-        tmp_list = next;
-    }
+	t_list	*tmp_list;
+	t_ray	*tmp_ray;
+	t_list	*next;
+
+	tmp_list = NULL;
+	tmp_list = *list;
+	while (tmp_list)
+	{
+		tmp_ray = (t_ray *)((tmp_list)->content);
+		if (tmp_ray)
+		{
+			free(tmp_ray);
+			tmp_ray = NULL;
+		}
+		next = (tmp_list)->next;
+		if (tmp_list)
+		{
+			free(tmp_list);
+			tmp_list = NULL;
+		}
+		tmp_list = next;
+	}
 }
 
-void ft_free_list(t_list *list)
+void	ft_free_list(t_list *list)
 {
-	char *line;
-	t_list *next;
-	while(list)
-	{ 
-		line = (char*)list->content;
+	char	*line;
+	t_list	*next;
+
+	while (list)
+	{
+		line = (char *)list->content;
 		ft_free(line);
 		next = list->next;
 		free(list);
 		list = next;
 	}
 }
-

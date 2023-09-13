@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 22:15:39 by kjarmoum          #+#    #+#             */
-/*   Updated: 2023/09/11 17:21:37 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 20:36:08 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ void	check_color_rang(char *key, char *value, t_map *map)
 	}
 }
 
+void	free_values(char *key, char *value)
+{
+	ft_free(key);
+	ft_free(value);
+}
+
 void	check_identifier(char *line, t_map *map, int *count)
 {
 	int		i;
@@ -57,13 +63,10 @@ void	check_identifier(char *line, t_map *map, int *count)
 			}
 			if (map->args[i]->flag == 1)
 				(*count)++;
-			if (map->args[i]->flag > 1)
-				print_error("a path is duplicated");
 			i++;
 		}
 	}
 	else
 		print_error("is error at identifiers");
-	ft_free(key);
-	ft_free(value);
+	free_values(key, value);
 }

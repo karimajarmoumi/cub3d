@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 11:43:12 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/12 22:13:20 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:40:01 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,4 @@ t_coord	vertical_intersection(t_map map, float angle)
 		coord.distance = calculate_distance(map.player_pos.x, map.player_pos.y,
 				coord.x, coord.y);
 	return (coord);
-}
-
-void	get_fov(t_map *map, float start_angle, float end_angle)
-{
-	t_coord	horizontal_coord;
-	t_coord	vertical_coord;
-
-	map->rays = NULL;
-	while (start_angle <= end_angle)
-	{
-		horizontal_coord = horizontal_intersection(*map,
-				normalize(start_angle));
-		vertical_coord = vertical_intersection(*map, normalize(start_angle));
-		if ((vertical_coord.distance >= horizontal_coord.distance))
-			ft_lstadd_back(&map->rays, ft_lstnew(ray_data(map,
-						normalize(start_angle), 1, horizontal_coord)));
-		else
-			ft_lstadd_back(&map->rays, ft_lstnew(ray_data(map,
-						normalize(start_angle), 0, vertical_coord)));
-		start_angle += ANGLE_FOV / (float)WINDOW_WIDTH;
-	}
 }

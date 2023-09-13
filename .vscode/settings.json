@@ -6,7 +6,10 @@
 	"files.associations": {
         "*.embeddedhtml": "html",
         "stdlib.h": "c",
-        "NEW.C": "cpp"
+        "NEW.C": "cpp",
+        "stdbool.h": "c",
+        "stdio.h": "c",
+        "map.h": "c"
     },
 
     "terminal.integrated.profiles.linux": {
