@@ -2,7 +2,8 @@
 
  This project inspired by the world-famous Wolfenstein 3D game,we use [MiniLibX library](https://github.com/42Paris/minilibx-linux)and [raycasting methode](https://en.wikipedia.org/wiki/Ray_casting#:~:text=Ray%20casting%20is%20the%20most,scenes%20to%20two%2Ddimensional%20images.)
 
-![Screencast-from-10-09-2023-11244](https://github.com/karimajarmoumi/cub3d/assets/104153067/b496e6f5-a18e-41d8-87bd-45b65b2e73c7)
+![Screencast-from-10-09-2023-11244](https://github.com/karimajarmoumi/cub3d/assets/104153067/02af9ee6-43c8-4c29-ac71-eeae0383bd38)
+
 
 ### Run 
 firsly clone the repository then you will find two directory one for mandatory part and the second for bonus part .
