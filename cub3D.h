@@ -6,7 +6,7 @@
 /*   By: kjarmoum <kjarmoum@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 13:50:27 by kel-baam          #+#    #+#             */
-/*   Updated: 2023/09/13 22:49:07 by kjarmoum         ###   ########.fr       */
+/*   Updated: 2023/09/14 16:30:15 by kjarmoum         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ typedef struct s_map
 	t_data			*textures;
 }					t_map;
 
+void				init_mlx_ptr(t_map *map);
 void				read_map(int fd, t_map *map, t_player *player);
 unsigned int		get_pixel_color(t_data *t, double x, double y);
 double				calculate_offset_x(t_ray *ray, int hit_wall_flag,
@@ -204,4 +205,6 @@ bool				check_map(char **map);
 void				draw_3d_map(t_map *map);
 t_coord				vertical_intersection(t_map map, float angle);
 t_coord				horizontal_intersection(t_map map, float angle);
+int					mouse_hook(int code, int x, int y, t_map *map);
+
 #endif
